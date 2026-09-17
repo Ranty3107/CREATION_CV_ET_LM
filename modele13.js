@@ -92,7 +92,7 @@ function buildModele13Template(d) {
     const sideTitleStyle = `color: ${primaryColor}; font-size: 14px; font-weight: bold; margin-top: 25px; margin-bottom: 15px;`;
 
     /* ================================
-       PROFIL, FORMATIONS, EXPÉRIENCES
+       PROFIL, FORMATIONS, DIPLÔMES, EXPÉRIENCES
     ================================= */
     const profileHTML = d.summary 
         ? `
@@ -113,6 +113,20 @@ function buildModele13Template(d) {
                     <span style="color: ${primaryColor}; font-size: 13px; font-weight: bold;">${escapeHTML(f.year || '')}</span>
                 </div>
                 <div style="color: #555; font-size: 14px; margin-top: 3px; font-style: italic;">${escapeHTML(f.school || '')}</div>
+            </div>
+        `).join('');
+
+    // AJOUT DE LA SECTION DIPLÔMES
+    const diplomes = Array.isArray(d.diplomes) ? d.diplomes : [];
+    const diplomesHTML = diplomes
+        .filter(dip => (dip.title || '').trim() || (dip.school || '').trim() || (dip.year || '').trim())
+        .map(dip => `
+            <div style="margin-bottom: 15px;">
+                <div style="display: flex; justify-content: space-between; align-items: baseline;">
+                    <strong style="color: #333; font-size: 15px;">${escapeHTML(dip.title || '')}</strong>
+                    <span style="color: ${primaryColor}; font-size: 13px; font-weight: bold;">${escapeHTML(dip.year || '')}</span>
+                </div>
+                <div style="color: #555; font-size: 14px; margin-top: 3px; font-style: italic;">${escapeHTML(dip.school || '')}</div>
             </div>
         `).join('');
 
@@ -210,6 +224,13 @@ function buildModele13Template(d) {
                                 <section style="margin-bottom: 30px;">
                                     <h2 style="${titleStyle}">Formation</h2>
                                     ${formationsHTML}
+                                </section>
+                            ` : ''}
+
+                            ${diplomesHTML ? `
+                                <section style="margin-bottom: 30px;">
+                                    <h2 style="${titleStyle}">Diplômes</h2>
+                                    ${diplomesHTML}
                                 </section>
                             ` : ''}
 
