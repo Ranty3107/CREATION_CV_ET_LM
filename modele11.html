@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modèle 11 - Modèle CV</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="cvPreview"></div>
+    
+    <!-- Scripts nécessaires -->
+    <script src="script.js"></script>
+    <script src="modele11.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const d = {
+                name: 'Sacha Dubois',
+                firstName: 'Sacha',
+                lastName: 'Dubois',
+                jobTitle: 'Comptable Qualifié et Expert en Analyse Financière',
+                email: 'hello@reallygreatsite.com',
+                phone: '+123-456-7890',
+                address: 'Permis B',
+                summary: 'Expert en comptabilité et gestion financière rigoureux.',
+                skillsRaw: 'Logiciel financier (90%), Normes comptables (80%), Analyse des données (85%), Communication (75%)',
+                skillsList: [
+                    { name: 'Logiciel financier', level: '90%' },
+                    { name: 'Normes comptables', level: '80%' },
+                    { name: 'Analyse des données', level: '85%' },
+                    { name: 'Communication', level: '75%' }
+                ],
+                languages: [
+                    { language: 'Français', level: '90%' },
+                    { language: 'Anglais', level: '70%' }
+                ],
+                experiences: [
+                    {
+                        title: 'Comptable Senior',
+                        company: 'Entreprise',
+                        city: 'Ville',
+                        period: 'Date',
+                        description: 'Gestion complète de la comptabilité générale, y compris la préparation et la vérification des comptes, la tenue des livres et la réconciliation bancaire.\nAnalyse détaillée des états financiers pour identifier les tendances et les opportunités d\'amélioration des marges bénéficiaires.'
+                    },
+                    {
+                        title: 'Comptable Junior',
+                        company: 'Entreprise',
+                        city: 'Ville',
+                        period: 'Date',
+                        description: 'Prise en charge des tâches de comptabilité générale, y compris la saisie des opérations, la vérification des factures et la gestion des comptes clients.'
+                    }
+                ],
+                formations: [
+                    { degree: 'Diplôme de Comptabilité', school: 'Université, ville et date' },
+                    { degree: 'Diplôme de Finance', school: 'Université, ville et date' }
+                ],
+                hobbies: ['Randonnée', 'Lecture', 'Bénévolat'],
+                photoDataUrl: ''
+            };
+
+            // Injection du template 11 dans la vue de test
+            if (typeof buildModele11Template === 'function') {
+                document.getElementById('cvPreview').innerHTML = buildModele11Template(d);
+            } else {
+                console.error("La fonction buildModele11Template n'est pas définie. Vérifiez que modele11.js est bien chargé.");
+            }
+        });
+    </script>
+</body>
+</html>

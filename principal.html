@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Générateur de CV Pro - Format A4</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg-slate-50 text-slate-800 min-h-screen py-8 px-4 font-sans antialiased">
+
+<header class="max-w-7xl mx-auto mb-8 text-center lg:text-left">
+    <h1 id="cvGeneratorTitle" style="font-size: 24px; font-weight: 700; color: #1e293b;">Générateur de CV Pro</h1>
+    <p class="text-sm text-slate-500 mt-1">
+        Créez et personnalisez votre CV professionnel.
+    </p>
+    <div class="flex justify-center lg:justify-start gap-2 mt-5">
+    <button
+        type="button"
+        id="tabCvBtn"
+        onclick="switchMainTab('cv')"
+        class="px-5 py-2.5 rounded-xl bg-indigo-600 text-white font-bold text-sm shadow-md transition-all">
+        📄 Mon CV
+    </button>
+
+    <button
+        type="button"
+        id="tabLetterBtn"
+        onclick="switchMainTab('letter')"
+        class="px-5 py-2.5 rounded-xl bg-white text-slate-600 border border-slate-200 font-bold text-sm hover:border-indigo-400 transition-all">
+        ✉️ Lettre de motivation
+    </button>
+</div>
+</header>
+
+<main id="cvTabContent" class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8">
+<aside class="lg:col-span-4 xl:col-span-3 bg-slate-50/50 p-6 rounded-2xl shadow-lg border border-slate-200 space-y-6 no-print overflow-y-auto max-h-[85vh] sticky top-8 custom-scrollbar">
+
+<h2 class="text-xl font-extrabold text-slate-800 flex items-center gap-2">
+<svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+</svg>
+Éditer le CV
+</h2>
+
+<div class="mb-6">
+
+<label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">
+Choisissez un modèle
+</label>
+
+<div class="grid grid-cols-3 gap-2">
+
+<!-- 1. Moderne -->
+<button type="button"
+id="btn-tpl-modern"
+onclick="selectTemplate('modern')"
+class="template-card p-2 border-2 rounded-lg text-center cursor-pointer transition ring-4 ring-indigo-600 border-indigo-600 bg-indigo-50 shadow-lg">
+<div class="h-10 bg-slate-200 rounded mb-1 flex items-center justify-center text-[10px] font-bold text-slate-600">
+Moderne
+</div>
+<span class="text-[10px] font-semibold text-slate-700">Moderne</span>
+</button>
+
+<!-- 2. Bandeau -->
+<button type="button"
+id="btn-tpl-banner"
+onclick="selectTemplate('banner')"
+class="template-card p-2 border-2 border-slate-200 bg-white rounded-lg text-center cursor-pointer transition hover:border-indigo-400">
+<div class="h-10 bg-teal-800 rounded mb-1 flex items-center justify-center text-[10px] font-bold text-white">
+Bandeau
+</div>
+<span class="text-[10px] font-semibold text-slate-700">Bandeau</span>
+</button>
+
+<!-- 3. Épuré -->
+<button type="button"
+id="btn-tpl-minimalist"
+onclick="selectTemplate('minimalist')"
+class="template-card p-2 border-2 border-slate-200 bg-white rounded-lg text-center cursor-pointer transition hover:border-indigo-400">
+<div class="h-10 bg-amber-100 rounded mb-1 flex items-center justify-center text-[10px] font-bold text-amber-800">
+Épuré
+</div>
+<span class="text-[10px] font-semibold text-slate-700">Épuré</span>
+</button>
+
+<!-- 4. Centré -->
+<button type="button"
+id="btn-tpl-headerCenter"
+onclick="selectTemplate('headerCenter')"
+class="template-card p-2 border-2 border-slate-200 bg-white rounded-lg text-center cursor-pointer transition hover:border-indigo-400">
+<div class="h-10 bg-slate-700 rounded mb-1 flex items-center justify-center text-[10px] font-bold text-white">
+Centré
+</div>
+<span class="text-[10px] font-semibold text-slate-700">Centré</span>
+</button>
+
+<!-- 5. Sombre -->
+<button type="button"
+id="btn-tpl-darkSidebar"
+onclick="selectTemplate('darkSidebar')"
+class="template-card p-2 border-2 border-slate-200 bg-white rounded-lg text-center cursor-pointer transition hover:border-indigo-400">
+<div class="h-10 bg-slate-900 rounded mb-1 flex items-center justify-center text-[10px] font-bold text-teal-400">
+Sombre
+</div>
+<span class="text-[10px] font-semibold text-slate-700">Sombre</span>
+</button>
+
+<!-- 6. Moderne Bleu -->
+<button type="button"
+id="btn-tpl-modernBlue"
+onclick="selectTemplate('modernBlue')"
+class="template-card p-2 border-2 border-slate-200 bg-white rounded-lg text-center cursor-pointer transition hover:border-indigo-400">
+<div class="h-10 rounded mb-1 flex overflow-hidden">
+    <span class="w-2/5 bg-[#263F5B]"></span>
+    <span class="w-3/5 bg-white"></span>
+</div>
+<span class="text-[10px] font-semibold text-slate-700">Moderne Bleu</span>
+</button>
+
+<!-- 7. Bannière Pro -->
+<button type="button" 
+id="btn-tpl-bannerBlue" 
+onclick="selectTemplate('bannerBlue')" 
+class="template-card p-2 border-2 border-slate-200 bg-white rounded-lg text-center cursor-pointer transition hover:border-indigo-400">
+    <div class="h-10 bg-[#5B6C9B] rounded mb-1 flex items-center justify-center text-[10px] font-bold text-white">Bannière</div>
+    <span class="text-[10px] font-semibold text-slate-700">Bannière Pro</span>
+</button>
+
+<!-- 8. Sidebar Bleue -->
+<button type="button" 
+id="btn-tpl-sidebarBlue" 
+onclick="selectTemplate('sidebarBlue')" 
+class="template-card p-2 border-2 border-slate-200 bg-white rounded-lg text-center cursor-pointer transition hover:border-indigo-400">
+    <div class="h-10 rounded mb-1 flex overflow-hidden relative bg-slate-50">
+        <span class="absolute top-0 left-0 w-1/3 h-full bg-[#4F65F1] rounded-tr-lg"></span>
+    </div>
+    <span class="text-[10px] font-semibold text-slate-700">Sidebar Bleue</span>
+</button>
+
+<!-- 9. Élégant Rouge -->
+<button type="button" 
+id="btn-tpl-waveRed" 
+onclick="selectTemplate('waveRed')" 
+class="template-card p-2 border-2 border-slate-200 bg-white rounded-lg text-center cursor-pointer transition hover:border-indigo-400">
+    <div class="h-10 rounded mb-1 relative overflow-hidden bg-[#F7F5F0]">
+        <div class="absolute top-0 right-0 w-3/4 h-full bg-[#8A233A] rounded-bl-lg"></div>
+    </div>
+    <span class="text-[10px] font-semibold text-slate-700">Élégant Rouge</span>
+</button>
+
+<!-- 10. Modèle 10 -->
+<button type="button"
+id="btn-tpl-modele10"
+onclick="selectTemplate('modele10')"
+class="template-card p-2 border-2 border-slate-200 bg-white rounded-lg text-center cursor-pointer transition hover:border-indigo-400">
+<div class="h-10 rounded mb-1 flex overflow-hidden flex-col">
+    <span class="h-4 bg-[#263F5B]"></span>
+    <span class="flex-1 bg-slate-50"></span>
+</div>
+<span class="text-[10px] font-semibold text-slate-700">Modèle 10</span>
+</button>
+
+<!-- 11. Modèle 11 -->
+<button type="button"
+id="btn-tpl-modele11"
+onclick="selectTemplate('modele11')"
+class="template-card p-2 border-2 border-slate-200 bg-white rounded-lg text-center cursor-pointer transition hover:border-indigo-400">
+<div class="h-10 rounded mb-1 flex overflow-hidden">
+    <span class="w-1/3 bg-[#617278]"></span>
+    <span class="w-2/3 bg-[#f5f2eb]"></span>
+</div>
+<span class="text-[10px] font-semibold text-slate-700">Modèle 11</span>
+</button>
+<button
+    type="button"
+    id="btn-tpl-modele12"
+    class="template-card border border-slate-200 bg-white rounded-xl p-2 transition-all hover:shadow-md"
+    onclick="selectTemplate('modele12')">
+
+    <div class="h-32 rounded-lg overflow-hidden bg-slate-100 relative">
+
+        <div class="absolute inset-0 flex">
+
+            <div class="w-[36%] bg-slate-100 relative">
+
+                <div
+                    class="absolute top-0 left-0 right-0 h-12"
+                    style="
+                        background:#3B5998;
+                        border-radius:0 0 50% 50%;
+                    ">
+                </div>
+
+                <div
+                    class="absolute top-7 left-1/2 -translate-x-1/2
+                           w-10 h-10 rounded-full bg-white
+                           border-2 border-white shadow-md">
+                </div>
+
+            </div>
+
+            <div class="flex-1 bg-white p-2">
+
+                <div
+                    class="h-2 w-16 mb-2"
+                    style="background:#3B5998;">
+                </div>
+
+                <div class="h-1.5 bg-slate-200 w-full mb-1"></div>
+                <div class="h-1.5 bg-slate-200 w-4/5 mb-3"></div>
+
+                <div
+                    class="h-2 w-20 mb-2"
+                    style="background:#3B5998;">
+                </div>
+
+                <div class="h-1.5 bg-slate-200 w-full mb-1"></div>
+                <div class="h-1.5 bg-slate-200 w-5/6"></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="text-center mt-2">
+        <span class="font-semibold text-sm text-slate-700">
+            Modèle 12
+        </span>
+    </div>
+
+</button>
+
+<!-- 13. Modèle 13 -->
+<button type="button"
+    id="btn-tpl-modele13"
+    onclick="selectTemplate('modele13')"
+    class="template-card p-2 border-2 border-slate-200 bg-white rounded-lg text-center cursor-pointer transition hover:border-indigo-400">
+    <div class="h-10 rounded mb-1 flex overflow-hidden">
+        <span class="w-1/3 bg-[#3B5998]"></span>
+        <span class="w-2/3 bg-slate-50"></span>
+    </div>
+    <span class="text-[10px] font-semibold text-slate-700">Modèle 13</span>
+</button>
+</div>
+
+<div class="section-card">
+
+<h3 class="section-title">
+<svg class="w-5 h-5 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+</svg>
+Informations
+</h3>
+
+<div>
+<label class="block text-xs font-semibold text-slate-600 mb-1">
+Nom complet
+</label>
+<input type="text" id="inputName" class="input-field" placeholder="Ex : Jean DUPONT">
+</div>
+
+<div>
+<label class="block text-xs font-semibold text-slate-600 mb-1">
+Photo d'identité
+</label>
+
+<label class="flex items-center justify-center w-full px-4 py-2 border-2 border-dashed border-slate-300 rounded-lg cursor-pointer hover:bg-slate-50 hover:border-indigo-400 transition-colors">
+
+<span class="text-sm text-slate-500 flex items-center gap-2">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
+</svg>
+Cliquer pour choisir une photo
+</span>
+
+<input type="file" id="inputPhotoFile" accept="image/*" class="hidden">
+
+</label>
+</div>
+
+<div>
+<label class="block text-xs font-semibold text-slate-600 mb-1">
+Email
+</label>
+<input type="email" id="inputEmail" class="input-field" placeholder="Ex : email@domaine.com">
+</div>
+
+<div>
+<label class="block text-xs font-semibold text-slate-600 mb-1">
+Téléphone
+</label>
+<input type="text" id="inputPhone" class="input-field" placeholder="Ex : +261 34 00 000 00">
+</div>
+
+<div>
+<label class="block text-xs font-semibold text-slate-600 mb-1">
+Adresse
+</label>
+<textarea id="inputAddress" rows="2" class="input-field resize-none" placeholder="Votre adresse complète"></textarea>
+</div>
+
+<div>
+<label class="block text-xs font-semibold text-slate-600 mb-1">
+Date de naissance
+</label>
+<input type="text" id="inputBirthdate" class="input-field" placeholder="Ex : 01 janvier 1990">
+</div>
+
+</div>
+
+<div class="section-card">
+
+<h3 class="section-title">
+Profil professionnel
+</h3>
+
+<textarea id="inputSummary"
+rows="4"
+class="input-field resize-y min-h-[100px]"
+placeholder="Décrivez brièvement votre parcours, vos compétences et vos objectifs..."></textarea>
+
+</div>
+<!-- NOUVEAU BLOC : DIPLÔMES -->
+<div class="section-card">
+
+    <div class="flex justify-between items-center">
+
+        <h3 class="section-title mb-0 border-none">
+            Diplômes
+        </h3>
+
+        <button type="button"
+            onclick="addDiplomeField()"
+            class="add-btn cursor-pointer">
+            + Ajouter
+        </button>
+
+    </div>
+
+    <div id="diplomesContainer" class="space-y-3 mt-3"></div>
+
+</div>
+<div class="section-card">
+
+<div class="flex justify-between items-center">
+
+<h3 class="section-title mb-0 border-none">
+Formations
+</h3>
+
+<button type="button"
+onclick="addFormationField()"
+class="add-btn cursor-pointer">
++ Ajouter
+</button>
+
+</div>
+
+<div id="formationsContainer" class="space-y-3 mt-3"></div>
+
+</div>
+
+<div class="section-card">
+
+<div class="flex justify-between items-center">
+
+<h3 class="section-title mb-0 border-none">
+Expériences
+</h3>
+
+<button type="button"
+onclick="addExperienceField()"
+class="add-btn cursor-pointer">
++ Ajouter
+</button>
+
+</div>
+
+<div id="experiencesContainer" class="space-y-3 mt-3"></div>
+
+</div>
+
+<div class="section-card">
+
+<h3 class="section-title">
+Compétences
+</h3>
+
+<input type="text"
+id="inputSkills"
+class="input-field"
+placeholder="Ex : Word, Excel, Gestion, Communication">
+
+</div>
+
+<div class="section-card">
+
+<div class="flex justify-between items-center">
+
+<h3 class="section-title mb-0 border-none">
+Langues
+</h3>
+
+<button type="button"
+onclick="addLanguageField()"
+class="add-btn cursor-pointer">
++ Ajouter
+</button>
+
+</div>
+
+
+    <div id="languagesContainer" class="space-y-3 mt-3"></div>
+</div>
+
+<!-- NOUVEAU BLOC : CENTRES D'INTÉRÊT -->
+<div class="section-card">
+    <h3 class="section-title">
+        Centres d'intérêt
+    </h3>
+    <input type="text"
+        id="inputHobbies"
+        class="input-field"
+        placeholder="Ex : Lecture, Randonnée, Football (séparés par des virgules)">
+</div>
+
+
+<div class="pt-2 space-y-3">
+
+<button id="downloadPdfBtn"
+type="button"
+onclick="openMvolaModal()"
+class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-xl transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer text-sm">
+
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+</svg>
+
+Générer le CV PDF
+
+</button>
+
+</div>
+
+</aside>
+
+<section class="lg:col-span-8 xl:col-span-9 flex justify-center items-start overflow-x-auto pb-10">
+
+<div id="cvPreview"
+class="cv-a4-page bg-white shadow-2xl ring-1 ring-slate-900/5">
+</div>
+
+</section>
+
+</main>
+<section
+    id="letterTabContent"
+    class="hidden max-w-7xl mx-auto">
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+
+        <!-- PANNEAU DE CONFIGURATION -->
+        <aside
+            class="lg:col-span-4 xl:col-span-3 bg-slate-50/50 p-6 rounded-2xl shadow-lg border border-slate-200 space-y-5 no-print">
+
+            <h2 class="text-xl font-extrabold text-slate-800 flex items-center gap-2">
+                <span class="text-2xl">✉️</span>
+                Lettre de motivation
+            </h2>
+
+            <p class="text-xs text-slate-500 leading-relaxed">
+                Créez automatiquement une lettre de motivation
+                personnalisée à partir des informations de votre CV.
+            </p>
+
+            <!-- POSTE -->
+            <div class="section-card">
+
+                <label class="block text-xs font-semibold text-slate-600 mb-1">
+                    Poste recherché *
+                </label>
+
+                <input
+                    type="text"
+                    id="letterJob"
+                    class="input-field"
+                    placeholder="Ex : Responsable commercial">
+
+            </div>
+
+            <!-- ENTREPRISE -->
+            <div class="section-card">
+
+                <label class="block text-xs font-semibold text-slate-600 mb-1">
+                    Entreprise
+                </label>
+
+                <input
+                    type="text"
+                    id="letterCompany"
+                    class="input-field"
+                    placeholder="Ex : ABC Madagascar">
+
+            </div>
+
+            <!-- DESTINATAIRE -->
+            <div class="section-card">
+
+                <label class="block text-xs font-semibold text-slate-600 mb-1">
+                    Destinataire
+                </label>
+
+                <input
+                    type="text"
+                    id="letterRecipient"
+                    class="input-field"
+                    placeholder="Ex : Madame la Directrice">
+
+            </div>
+
+            <!-- VILLE / DATE -->
+            <div class="section-card">
+
+                <label class="block text-xs font-semibold text-slate-600 mb-1">
+                    Ville
+                </label>
+
+                <input
+                    type="text"
+                    id="letterCity"
+                    class="input-field"
+                    placeholder="Ex : Antananarivo">
+
+            </div>
+
+            <!-- TON -->
+            <div class="section-card">
+
+                <label class="block text-xs font-semibold text-slate-600 mb-2">
+                    Style de la lettre
+                </label>
+
+                <select
+                    id="letterTone"
+                    class="input-field">
+
+                    <option value="professionnel">
+                        Professionnel
+                    </option>
+
+                    <option value="classique">
+                        Classique
+                    </option>
+
+                    <option value="dynamique">
+                        Dynamique
+                    </option>
+
+                    <option value="sobre">
+                        Sobre et élégant
+                    </option>
+
+                </select>
+
+            </div>
+
+            <!-- BOUTON GENERATION -->
+            <button
+                type="button"
+                onclick="createMotivationLetter()"
+                class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-xl transition-all shadow-md flex items-center justify-center gap-2">
+
+                ✨ Créer ma lettre selon mon CV
+
+            </button>
+
+            <!-- BOUTON RESET -->
+            <button
+                type="button"
+                onclick="resetMotivationLetter()"
+                class="w-full bg-white hover:bg-slate-50 text-slate-700 font-semibold py-2.5 px-4 rounded-xl border border-slate-200 transition-all">
+
+                Réinitialiser
+
+            </button>
+
+        </aside>
+
+
+        <!-- APERCU LETTRE -->
+        <section
+            class="lg:col-span-8 xl:col-span-9 flex justify-center items-start overflow-x-auto pb-10">
+
+            <div class="w-full">
+
+                <div class="flex justify-between items-center mb-4 no-print">
+
+                    <div>
+                        <h3 class="text-lg font-extrabold text-slate-800">
+                            Aperçu de votre lettre
+                        </h3>
+
+                        <p class="text-xs text-slate-500">
+                            Vous pouvez modifier directement le texte.
+                        </p>
+                    </div>
+
+                    <button
+                        type="button"
+                        onclick="openMvolaModal('letter')()"
+                        class="bg-slate-900 hover:bg-slate-800 text-white px-4 py-2 rounded-lg text-xs font-bold shadow-md">
+
+                        🖨️ Imprimer / PDF
+
+                    </button>
+
+                </div>
+
+
+                <!-- PAGE A4 -->
+                <div
+                    id="motivationLetterPreview"
+                    class="motivation-letter-a4 bg-white shadow-2xl ring-1 ring-slate-900/5">
+
+                    <div class="letter-header">
+
+                        <div>
+
+                            <h1 id="letterPreviewName">
+                                Votre Nom
+                            </h1>
+
+                            <div
+                                id="letterPreviewContact"
+                                class="letter-contact">
+                                email@email.com
+                            </div>
+
+                        </div>
+
+                        <div
+                            id="letterPreviewCityDate"
+                            class="letter-date">
+                        </div>
+
+                    </div>
+
+
+                    <div class="letter-recipient">
+
+                        <div id="letterPreviewRecipient">
+                            À l'attention du responsable du recrutement
+                        </div>
+
+                        <div id="letterPreviewCompany">
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        id="motivationLetterEditable"
+                        class="letter-body"
+                        contenteditable="true">
+
+                        <p>
+                            Votre lettre de motivation apparaîtra ici.
+                        </p>
+
+                    </div>
+
+
+                    <div class="letter-signature">
+
+                        <p>
+                            Cordialement,
+                        </p>
+
+                        <strong id="letterPreviewSignature">
+                            Votre Nom
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+</section>
+
+<div id="mvolaModal"
+class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
+
+<div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-100">
+
+<div class="text-center">
+
+<div class="w-14 h-14 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold">
+📱
+</div>
+
+<h3 id="mvolaModalTitle"
+class="text-xl font-extrabold text-slate-900 mb-2">
+CV généré avec succès !
+</h3>
+
+<p id="mvolaModalText"
+class="text-xs text-slate-600 mb-6 leading-relaxed">
+Votre CV a été créé avec succès.
+</p>
+
+</div>
+
+<div class="bg-amber-50 p-4 rounded-xl border border-amber-200 mb-6 space-y-2 text-xs text-slate-800">
+
+<p class="font-bold text-amber-900">
+💡 Si vous voulez faire un don MVola :
+</p>
+
+<ol class="list-decimal list-inside space-y-1 text-slate-700">
+
+<li>
+Effectuez le transfert MVola au :
+<strong class="text-slate-900 font-mono">
+034.97.981.95
+</strong>
+</li>
+
+<li>
+Raison :
+<strong>CV</strong>
+</li>
+
+</ol>
+
+</div>
+
+<div class="flex justify-center mt-6 mb-4">
+
+<button id="modalDownloadPdfBtn"
+type="button"
+onclick="downloadPDF()"
+class="bg-[#6B5B52] hover:bg-[#52453e] text-white font-semibold py-3 px-6 rounded-xl shadow-md transition-all duration-300 flex items-center gap-2 cursor-pointer">
+
+<svg xmlns="http://www.w3.org/2000/svg"
+class="h-5 w-5"
+fill="none"
+viewBox="0 0 24 24"
+stroke="currentColor">
+
+<path stroke-linecap="round"
+stroke-linejoin="round"
+stroke-width="2"
+d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l4 4m0 0l-4-4m4 4V4"/>
+
+</svg>
+
+Télécharger mon CV en PDF
+
+</button>
+
+</div>
+
+<button type="button"
+onclick="closeMvolaModal()"
+class="w-full bg-slate-900 hover:bg-slate-800 text-white font-semibold py-3 px-4 rounded-xl transition-all text-xs shadow-md cursor-pointer">
+
+J'ai compris / Fermer
+
+</button>
+
+</div>
+</div>
+
+<script src="script.js"></script>
+<script src="modele1.js"></script>
+<script src="modele2.js"></script>
+<script src="modele3.js"></script>
+<script src="modele4.js"></script>
+<script src="modele5.js"></script>
+<script src="modele6.js"></script>
+<script src="modele7.js"></script>
+<script src="modele8.js"></script>
+<script src="modele9.js"></script>
+<script src="lettre.js"></script>
+<script src="modele10.js"></script>
+<script src="modele11.js"></script>
+<script src="modele12.js"></script>
+<script src="modele13.js"></script>
+</body>
+</html>

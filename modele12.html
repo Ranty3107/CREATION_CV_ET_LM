@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modèle 12 - Modèle CV</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="modele12.css">
+    
+    
+
+</head>
+<body>
+
+    <div id="cvPreview"></div>
+
+    <script src="script.js"></script>
+    <script src="modele12.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const d = {
+                name: '',
+                firstName: '',
+                lastName: '',
+
+                jobTitle: '',
+
+                email: '',
+                phone: '',
+
+                address: '',
+
+                birthdate: '',
+
+                summary: '',
+
+                skillsRaw: '',
+
+                skillsList: [
+                    'Gestion d’équipe',
+                    'Contrôle qualité',
+                    'Saisie de données'
+                ],
+
+                hobbies: [],
+
+                languages: [
+                    {
+                        language: 'Anglais',
+                        level: 'Moyenne'
+                    },
+                    {
+                        language: 'Français',
+                        level: 'Moyenne'
+                    }
+                ],
+
+                formations: [
+                    {
+                        title: '',
+                        school: '',
+                        year: ''
+                    },
+                    {
+                        title: 'Baccalauréat technique hydraulique',
+                        school: 'Lycée Technique du Génie Civil – Ampefiloha',
+                        year: 'de 1985 à 1985'
+                    },
+                    {
+                        title: 'Formation en Management et Leadership',
+                        school: 'MADCOM',
+                        year: '2000'
+                    },
+                    {
+                        title: 'Business English Training',
+                        school: 'INSCAE',
+                        year: '1998'
+                    },
+                    {
+                        title: 'Formation en Informatique Bureautique',
+                        school: 'ISBM',
+                        year: '1989'
+                    },
+                    {
+                        title: '',
+                        school: '',
+                        year: ''
+                    }
+                ],
+
+                diplomes: [],
+
+                experiences: [
+                    {
+                        job: '',
+                        company: '',
+                        year: '',
+                        tasks: [
+                            '',
+                            '',
+                            '',
+                            '',
+                            ''
+                        ]
+                    },
+                    {
+                        job: '',
+                        company: '',
+                        year: '',
+                        tasks: [
+                            '',
+                            '',
+                            '',
+                            '',
+                            ''
+                        ]
+                    },
+                    {
+                        job: '',
+                        company: '',
+                        year: '',
+                        tasks: [
+                            '',
+                            '',
+                            ''
+                        ]
+                    },
+                    {
+                        job: 'Assistant administratif',
+                        company: 'Groupe TIKO Siège social',
+                        year: '2005-2006',
+                        tasks: [
+                            '',
+                            ''
+                        ]
+                    }
+                ],
+
+                photoDataUrl: ''
+            };
+
+            if(typeof buildModele12Template==='function'){
+
+                document.getElementById('cvPreview').innerHTML =
+                    buildModele12Template(d);
+
+            }else{
+
+                console.error(
+                    ""
+                );
+
+            }
+
+        });
+    </script>
+
+</body>
+</html>

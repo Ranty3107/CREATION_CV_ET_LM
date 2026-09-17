@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Modèle 10 - Modèle CV</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="cvPreview"></div>
+    <script src="script.js"></script>
+    <script src="modele10.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const d = {
+                name: 'Sarah Chen',
+                firstName: 'Sarah',
+                lastName: 'Chen',
+                email: 'sarah.chen@example.com',
+                phone: '+261 34 00 000 00',
+                address: 'Antananarivo, Madagascar',
+                birthdate: '01 janvier 1990',
+                summary: 'Senior Data Scientist expérimentée dans l\'analyse de données complexes, le machine learning et le déploiement de modèles prédictifs à grande échelle.',
+                skillsRaw: 'Python, R, SQL, Tableau, AWS, Power BI',
+                skillsList: ['Python', 'R', 'SQL', 'Tableau', 'AWS', 'Power BI'],
+                photoDataUrl: ''
+            };
+            document.getElementById('cvPreview').innerHTML = buildModele10Template(d);
+        });
+    </script>
+</body>
+</html>
