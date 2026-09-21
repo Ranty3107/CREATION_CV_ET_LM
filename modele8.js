@@ -210,8 +210,8 @@ function buildSidebarBlueTemplate(d){
                                 margin:0;
                                 color:#475569;">
                                ${escapeHTML(d.summary || '')
-    .replace(/&amp;#39;/gi,"'")
-    .replace(/&#39;/gi,"'")
+    .replace(/&amp;#0?39;/gi,"'")
+    .replace(/&#0?39;/gi,"'")
     .replace(/&apos;/gi,"'")
     .replace(/&amp;apos;/gi,"'")
     .replace(/&lt;br\s*\/?&gt;/gi,"<br>")}
