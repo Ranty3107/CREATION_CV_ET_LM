@@ -540,6 +540,205 @@
     position: relative;
     margin-bottom: 25px;
 }
+
+/* ================================
+   MODELE 14 - DESIGN BANDEAU & TIMELINE
+================================= */
+.cv-model14 {
+    position: relative;
+    width: 100%;
+    min-height: 297mm; /* Format A4 */
+    background-color: #ffffff;
+    font-family: Arial, sans-serif;
+    color: #333333;
+    z-index: 1;
+    overflow: hidden;
+}
+
+/* --- Formes de fond (Backgrounds) --- */
+.cv-model14-bg-sidebar {
+    position: absolute;
+    top: 0; 
+    left: 0; 
+    bottom: 0;
+    width: 35%;
+    background-color: #E6E8EA; /* Gris clair de la barre latérale */
+    z-index: -2;
+}
+
+.cv-model14-bg-banner {
+    position: absolute;
+    top: 60px; /* Décalage depuis le haut */
+    left: 0; 
+    right: 0;
+    height: 160px; /* Épaisseur du bandeau */
+    background-color: var(--cv-model13-color, #155f2e);
+    z-index: -1;
+    border-radius: 20px;
+}
+
+/* --- Conteneur Principal --- */
+.cv-model14-content {
+    position: relative;
+    z-index: 5;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+/* --- Barre Latérale (Sidebar) --- */
+.cv-model14-sidebar {
+    width: 35%;
+    padding: 35px 25px;
+    box-sizing: border-box;
+    color: var(--cv-model13-color, #153A5F);
+}
+
+.cv-model14-photo {
+    width: 100%;
+    max-width: 150px;
+    aspect-ratio: 3 / 4; /* Format portrait */
+    object-fit: cover;
+    border: 5px solid #ffffff;
+    margin: 0 auto 30px auto;
+    display: block;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.cv-model14-section-title-sidebar {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    margin-top: 30px;
+    color: var(--cv-model13-color, #153A5F);
+}
+
+.cv-model14-contact-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    word-break: break-word;
+}
+
+.cv-model14-sidebar-list {
+    list-style-type: none;
+    padding: 0; 
+    margin: 0;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.8;
+}
+
+.cv-model14-sidebar-list li {
+    margin-bottom: 4px;
+}
+
+/* Barres de progression Langues */
+.cv-model14-lang-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 12px;
+    font-weight: 600;
+}
+.cv-model14-lang-name {
+    width: 45%;
+}
+.cv-model14-lang-bar {
+    width: 55%;
+    height: 6px;
+    background-color: #ffffff;
+    border-radius: 4px;
+    overflow: hidden;
+}
+.cv-model14-lang-progress {
+    height: 100%;
+    background-color: var(--cv-model13-color, #153A5F);
+    border-radius: 4px;
+}
+
+/* --- Contenu Principal (Main) --- */
+.cv-model14-main {
+    width: 65%;
+    padding: 0 40px 40px 35px;
+    box-sizing: border-box;
+}
+
+/* En-tête avec nom (aligné dans le bandeau bleu) */
+.cv-model14-header-text {
+    height: 220px; /* 60px (top) + 160px (banner) */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 60px; /* Pousse le texte dans la zone bleue */
+    box-sizing: border-box;
+    color: #ffffff;
+}
+
+.cv-model14-name {
+    font-size: 36px;
+    font-weight: 700;
+    margin: 0 0 8px 0;
+    line-height: 1.1;
+}
+
+.cv-model14-title {
+    font-size: 18px;
+    font-weight: 400;
+    font-style: italic;
+    margin: 0;
+    opacity: 0.9;
+}
+
+.cv-model14-main-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--cv-model13-color, #153A5F);
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+/* Éléments de Formation (Sans puces/timeline) */
+.cv-model14-formation-item {
+    margin-bottom: 18px;
+}
+.cv-model14-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+.cv-model14-item-title {
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--cv-model13-color, #153A5F);
+}
+.cv-model14-item-date {
+    font-size: 11px;
+    font-style: italic;
+    color: #888888;
+}
+.cv-model14-item-subtitle {
+    font-size: 13px;
+    font-style: italic;
+    color: #555555;
+    margin-top: 4px;
+}
+
+/* Ligne Chronologique (Timeline pour Expériences) */
+.cv-model14-timeline {
+    border-left: 2px solid var(--cv-model13-color, #153A5F);
+    padding-left: 18px;
+    margin-left: 6px;
+}
+
+.cv-model14-timeline-item {
+    position: relative;
+    margin-bottom: 25px;
+}
+
 /* Règles universelles pour l'export PDF / Impression */
 @media print {
     body {
