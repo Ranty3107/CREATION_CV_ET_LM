@@ -1099,80 +1099,97 @@ function setPDFButtonsLoading(loading){
     });
 }
 
-let pendingDownloadType='cv';
+/* =========================================================
+   GESTION DU TELECHARGEMENT / MODALE (CV & LETTRE)
+   ========================================================= */
 
-function openMvolaModal(type='cv'){
-    const modal=document.getElementById('mvolaModal');
+let pendingDownloadType = 'cv';
 
-    if(!modal)return;
+function openMvolaModal(type = 'cv') {
+    const modal = document.getElementById('mvolaModal');
+    if (!modal) return;
 
-    pendingDownloadType=type;
+    pendingDownloadType = type;
+
+    // Adaptation des textes de la modale selon le type
+    const titleEl = document.getElementById('mvolaModalTitle');
+    const textEl = document.getElementById('mvolaModalText');
+    const btnEl = document.getElementById('modalDownloadPdfBtn');
+
+    if (type === 'letter') {
+        if (titleEl) titleEl.textContent = "Lettre de motivation prête !";
+        if (textEl) textEl.textContent = "Votre lettre de motivation a été générée avec succès.";
+        if (btnEl) {
+            btnEl.innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l4 4m0 0l-4-4m4 4V4"/>
+                </svg>
+                Télécharger ma lettre en PDF
+            `;
+        }
+    } else {
+        if (titleEl) titleEl.textContent = "CV généré avec succès !";
+        if (textEl) textEl.textContent = "Votre CV a été créé avec succès.";
+        if (btnEl) {
+            btnEl.innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l4 4m0 0l-4-4m4 4V4"/>
+                </svg>
+                Télécharger mon CV en PDF
+            `;
+        }
+    }
 
     modal.classList.remove('hidden');
     modal.classList.add('flex');
 }
 
-function closeMvolaModal(){
-    const modal=document.getElementById('mvolaModal');
-
-    if(!modal)return;
+function closeMvolaModal() {
+    const modal = document.getElementById('mvolaModal');
+    if (!modal) return;
 
     modal.classList.add('hidden');
     modal.classList.remove('flex');
 }
 
-async function downloadPDF(){
+async function downloadPDF() {
     closeMvolaModal();
 
-    if(pendingDownloadType==='letter'){
+    if (pendingDownloadType === 'letter') {
         printMotivationLetter();
         return;
     }
 
     const cv = document.getElementById('cvPreview');
-
-    if(!cv){
+    if (!cv) {
         alert('Impossible de trouver le CV à imprimer.');
         return;
     }
 
     const name = getInputValue('inputName');
-
-    let safeName = name
-        .replace(/[\\/:*?"<>|]+/g,'')
-        .replace(/\s+/g,'_')
-        .trim();
-
-    if(!safeName){
-        safeName = 'Mon_CV';
-    }
+    let safeName = name.replace(/[\\/:*?"<>|]+/g, '').replace(/\s+/g, '_').trim();
+    if (!safeName) safeName = 'Mon_CV';
 
     const originalTitle = document.title;
     document.title = `CV_${safeName}`;
 
     setPDFButtonsLoading(true);
 
-    try{
-        // Attendre que toutes les images (photos de profil, etc.) soient chargées
+    try {
         await waitForImages(cv);
 
-        setTimeout(()=>{
-            // Lancer l'impression du navigateur configurée pour le format A4
+        setTimeout(() => {
             window.print();
-
-            setTimeout(()=>{
+            setTimeout(() => {
                 document.title = originalTitle;
                 setPDFButtonsLoading(false);
             }, 1000);
-
         }, 300);
 
-    }catch(error){
+    } catch (error) {
         console.error('Erreur impression PDF:', error);
-
         document.title = originalTitle;
         setPDFButtonsLoading(false);
-
         alert('Impossible de préparer le CV pour l’impression.');
     }
 }

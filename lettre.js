@@ -431,65 +431,49 @@ function resetMotivationLetter(){
    IMPRESSION / PDF
    ========================================================= */
 
-function printMotivationLetter(){
+/* =========================================================
+   IMPRESSION / PDF LETTRE DE MOTIVATION
+   ========================================================= */
 
-    const name=getInputValue('inputName');
+function printMotivationLetter() {
+    const letterElement = document.getElementById('motivationLetterPreview');
 
-    let safeName=name
-        .replace(/[\\/:*?"<>|]+/g,'')
-        .replace(/\s+/g,'_')
-        .trim();
-
-    if(!safeName){
-        safeName='Mon_Nom';
+    if (!letterElement) {
+        alert("Impossible de trouver la lettre de motivation à imprimer.");
+        return;
     }
 
-    const originalTitle=document.title;
+    const name = getInputValue('inputName');
+    let safeName = name.replace(/[\\/:*?"<>|]+/g, '').replace(/\s+/g, '_').trim();
+    if (!safeName) safeName = 'Candidat';
 
-    document.title=
-        `Lettre_Motivation_${safeName}`;
+    const opt = {
+        margin: [0, 0, 0, 0],
+        filename: `Lettre_Motivation_${safeName}.pdf`,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { 
+            scale: 2, 
+            useCORS: true,
+            logging: false
+        },
+        jsPDF: { 
+            unit: 'mm', 
+            format: 'a4', 
+            orientation: 'portrait' 
+        }
+    };
 
-    setTimeout(()=>{
-
-        window.print();
-
-        setTimeout(()=>{
-
-            document.title=originalTitle;
-
-        },1000);
-
-    },300);
+    if (typeof html2pdf !== 'undefined') {
+        html2pdf().set(opt).from(letterElement).save();
+    } else {
+        // Mode secours par impression standard
+        const originalTitle = document.title;
+        document.title = `Lettre_Motivation_${safeName}`;
+        setTimeout(() => {
+            window.print();
+            setTimeout(() => {
+                document.title = originalTitle;
+            }, 1000);
+        }, 300);
+    }
 }
-
-document.addEventListener(
-    'DOMContentLoaded',
-    ()=>{
-
-        [
-            'letterJob',
-            'letterCompany',
-            'letterRecipient',
-            'letterCity',
-            'letterTone'
-        ].forEach(id=>{
-
-            const element=document.getElementById(id);
-
-            if(element){
-
-                element.addEventListener(
-                    'input',
-                    updateMotivationLetterPreview
-                );
-
-                element.addEventListener(
-                    'change',
-                    updateMotivationLetterPreview
-                );
-            }
-        });
-
-        updateMotivationLetterPreview();
-    }
-);

@@ -614,14 +614,15 @@ class="cv-a4-page bg-white shadow-2xl ring-1 ring-slate-900/5">
                         </p>
                     </div>
 
-                    <button
-                        type="button"
-                        onclick="openMvolaModal('letter')()"
-                        class="bg-slate-900 hover:bg-slate-800 text-white px-4 py-2 rounded-lg text-xs font-bold shadow-md">
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
-                        🖨️ Imprimer / PDF
-
-                    </button>
+<!-- 2. Correction du bouton -->
+<button
+    type="button"
+    onclick="openMvolaModal('letter')"
+    class="bg-slate-900 hover:bg-slate-800 text-white px-4 py-2 rounded-lg text-xs font-bold shadow-md">
+    🖨️ Imprimer / PDF
+</button>
 
                 </div>
 
