@@ -86,7 +86,7 @@ function getInputValue(id){
     return element?element.value.trim():'';
 }
 
-function selectTemplate(templateId){ const validTemplates=[ 'modern', 'banner', 'minimalist', 'headerCenter', 'darkSidebar', 'modernBlue', 'bannerBlue', 'sidebarBlue', 'waveRed', 'left-sidebar', 'modele10', 'modele11', 'modele12', 'modele13', 'modele14' ]; if(!validTemplates.includes(templateId)){ templateId='modern'; } currentTemplate=templateId; updateTemplateButtons(); renderCV(); }
+function selectTemplate(templateId){ const validTemplates=[ 'modern', 'banner', 'minimalist', 'headerCenter', 'darkSidebar', 'modernBlue', 'bannerBlue', 'sidebarBlue', 'waveRed', 'left-sidebar', 'modele10', 'modele11', 'modele12', 'modele13', 'modele14', 'modele15', 'modele16']; if(!validTemplates.includes(templateId)){ templateId='modern'; } currentTemplate=templateId; updateTemplateButtons(); renderCV(); }
 
 function updateTemplateButtons(){
 
@@ -287,6 +287,8 @@ function renderCV(){
         case 'modele12': html = buildModele12Template(d); break;
         case 'modele13': html = buildModele13Template(d); break;
         case 'modele14': html = buildModele14Template(d); break;
+        case 'modele15': html = buildModele15Template(d); break;
+        case 'modele16': html = buildModele16Template(d); break;
         default: 
             currentTemplate = 'modern'; 
             updateTemplateButtons(); 
@@ -341,6 +343,10 @@ function renderSelectedCVTemplate(templateId,candidateData){
         return  buildModele13Template(d);
         case 'modele14':
         return  buildModele14Template(d);
+        case 'modele15':
+        return buildModele15Template(d);
+        case 'modele16':
+        return buildModele16Template(d);
         default:
             return buildModernTemplate(d);
     }
