@@ -19,25 +19,55 @@
 <header class="max-w-7xl mx-auto mb-8 text-center lg:text-left">
     <h1 id="cvGeneratorTitle" style="font-size: 24px; font-weight: 700; color: #1e293b;">Générateur de CV Pro</h1>
     <p class="text-sm text-slate-500 mt-1">
-        Créez et personnalisez votre CV professionnel.
+        Créez et personnalisez votre CV / LM / DEMANDE (Emploi, Stage) / DEMISSION.
     </p>
-    <div class="flex justify-center lg:justify-start gap-2 mt-5">
-    <button
-        type="button"
-        id="tabCvBtn"
-        onclick="switchMainTab('cv')"
-        class="px-5 py-2.5 rounded-xl bg-indigo-600 text-white font-bold text-sm shadow-md transition-all">
-        📄 Mon CV
-    </button>
+    <div class="flex justify-center lg:justify-start gap-2 mt-5 flex-wrap">
+        <button
+            type="button"
+            id="tabCvBtn"
+            onclick="switchMainTab('cv')"
+            class="px-5 py-2.5 rounded-xl bg-indigo-600 text-white font-bold text-sm shadow-md transition-all">
+            📄 Mon CV
+        </button>
 
-    <button
-        type="button"
-        id="tabLetterBtn"
-        onclick="switchMainTab('letter')"
-        class="px-5 py-2.5 rounded-xl bg-white text-slate-600 border border-slate-200 font-bold text-sm hover:border-indigo-400 transition-all">
-        ✉️ Lettre de motivation
-    </button>
-</div>
+        <button
+            type="button"
+            id="tabLetterBtn"
+            onclick="switchMainTab('letter')"
+            class="px-5 py-2.5 rounded-xl bg-white text-slate-600 border border-slate-200 font-bold text-sm hover:border-indigo-400 transition-all">
+            ✉️ Lettre de motivation
+        </button>
+
+        <button
+            type="button"
+            id="tabDemandeBtn"
+            onclick="switchMainTab('demande')"
+            class="px-5 py-2.5 rounded-xl bg-white text-slate-600 border border-slate-200 font-bold text-sm hover:border-indigo-400 transition-all">
+            📝 Demande d'emploi
+        </button>
+        <button
+    type="button"
+    id="tabDemissionBtn"
+    onclick="switchMainTab('demission')"
+    class="px-5 py-2.5 rounded-xl bg-white text-slate-600 border border-slate-200 font-bold text-sm hover:border-indigo-400 transition-all">
+    🚪 Lettre de démission
+</button>
+<button
+    type="button"
+    id="tabDecesBtn"
+    onclick="switchMainTab('deces')"
+    class="px-5 py-2.5 rounded-xl bg-white text-slate-600 border border-slate-200 font-bold text-sm hover:border-indigo-400 transition-all">
+    🪦 Faire-part décès
+</button>
+
+<button
+    type="button"
+    id="tabMariageBtn"
+    onclick="switchMainTab('mariage')"
+    class="px-5 py-2.5 rounded-xl bg-white text-slate-600 border border-slate-200 font-bold text-sm hover:border-indigo-400 transition-all">
+    💍 Invitation Mariage
+</button>
+    </div>
 </header>
 
 <main id="cvTabContent" class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8">
@@ -179,117 +209,71 @@ class="template-card p-2 border-2 border-slate-200 bg-white rounded-lg text-cent
 </div>
 <span class="text-[10px] font-semibold text-slate-700">Modèle 11</span>
 </button>
-<button
-    type="button"
-    id="btn-tpl-modele12"
-    class="template-card border border-slate-200 bg-white rounded-xl p-2 transition-all hover:shadow-md"
-    onclick="selectTemplate('modele12')">
 
-    <div class="h-32 rounded-lg overflow-hidden bg-slate-100 relative">
-
-        <div class="absolute inset-0 flex">
-
-            <div class="w-[36%] bg-slate-100 relative">
-
-                <div
-                    class="absolute top-0 left-0 right-0 h-12"
-                    style="
-                        background:#3B5998;
-                        border-radius:0 0 50% 50%;
-                    ">
-                </div>
-
-                <div
-                    class="absolute top-7 left-1/2 -translate-x-1/2
-                           w-10 h-10 rounded-full bg-white
-                           border-2 border-white shadow-md">
-                </div>
-
-            </div>
-
-            <div class="flex-1 bg-white p-2">
-
-                <div
-                    class="h-2 w-16 mb-2"
-                    style="background:#3B5998;">
-                </div>
-
-                <div class="h-1.5 bg-slate-200 w-full mb-1"></div>
-                <div class="h-1.5 bg-slate-200 w-4/5 mb-3"></div>
-
-                <div
-                    class="h-2 w-20 mb-2"
-                    style="background:#3B5998;">
-                </div>
-
-                <div class="h-1.5 bg-slate-200 w-full mb-1"></div>
-                <div class="h-1.5 bg-slate-200 w-5/6"></div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <div class="text-center mt-2">
-        <span class="font-semibold text-sm text-slate-700">
-            Modèle 12
-        </span>
-    </div>
-
+<!-- 12. Modèle 12 -->
+<button type="button"
+id="btn-tpl-modele12"
+onclick="selectTemplate('modele12')"
+class="template-card p-2 border-2 border-slate-200 bg-white rounded-lg text-center cursor-pointer transition hover:border-indigo-400">
+<div class="h-10 bg-blue-900 rounded mb-1"></div>
+<span class="text-[10px] font-semibold text-slate-700">Modèle 12</span>
 </button>
 
 <!-- 13. Modèle 13 -->
 <button type="button"
-    id="btn-tpl-modele13"
-    onclick="selectTemplate('modele13')"
-    class="template-card p-2 border-2 border-slate-200 bg-white rounded-lg text-center cursor-pointer transition hover:border-indigo-400">
-    <div class="h-10 rounded mb-1 flex overflow-hidden">
-        <span class="w-1/3 bg-[#3B5998]"></span>
-        <span class="w-2/3 bg-slate-50"></span>
-    </div>
-    <span class="text-[10px] font-semibold text-slate-700">Modèle 13</span>
+id="btn-tpl-modele13"
+onclick="selectTemplate('modele13')"
+class="template-card p-2 border-2 border-slate-200 bg-white rounded-lg text-center cursor-pointer transition hover:border-indigo-400">
+<div class="h-10 rounded mb-1 flex overflow-hidden">
+    <span class="w-1/3 bg-[#3B5998]"></span>
+    <span class="w-2/3 bg-slate-50"></span>
+</div>
+<span class="text-[10px] font-semibold text-slate-700">Modèle 13</span>
 </button>
+
 <!-- 14. Modèle 14 -->
 <button type="button"
-    id="btn-tpl-modele14"
-    onclick="selectTemplate('modele14')"
-    class="template-card p-2 border-2 border-slate-200 bg-white rounded-lg text-center cursor-pointer transition hover:border-indigo-400">
-    <div class="h-10 rounded mb-1 flex overflow-hidden">
-        <span class="w-1/3 bg-[#3B5998]"></span>
-        <span class="w-2/3 bg-slate-50"></span>
-    </div>
-    <span class="text-[10px] font-semibold text-slate-700">Modèle 14</span>
+id="btn-tpl-modele14"
+onclick="selectTemplate('modele14')"
+class="template-card p-2 border-2 border-slate-200 bg-white rounded-lg text-center cursor-pointer transition hover:border-indigo-400">
+<div class="h-10 rounded mb-1 flex overflow-hidden">
+    <span class="w-1/3 bg-[#3B5998]"></span>
+    <span class="w-2/3 bg-slate-50"></span>
+</div>
+<span class="text-[10px] font-semibold text-slate-700">Modèle 14</span>
 </button>
+
 <!-- 15. Modèle 15 -->
 <button type="button"
-    id="btn-tpl-modele15"
-    onclick="selectTemplate('modele15')"
-    class="template-card p-2 border-2 border-slate-200 bg-white rounded-lg text-center cursor-pointer transition hover:border-indigo-400">
-    <div class="h-10 rounded mb-1 flex overflow-hidden">
-        <span class="w-2/3 bg-slate-50"></span>
-        <span class="w-1/3 bg-[#214263]"></span>
-    </div>
-    <span class="text-[10px] font-semibold text-slate-700">Modèle 15</span>
+id="btn-tpl-modele15"
+onclick="selectTemplate('modele15')"
+class="template-card p-2 border-2 border-slate-200 bg-white rounded-lg text-center cursor-pointer transition hover:border-indigo-400">
+<div class="h-10 rounded mb-1 flex overflow-hidden">
+    <span class="w-2/3 bg-slate-50"></span>
+    <span class="w-1/3 bg-[#214263]"></span>
+</div>
+<span class="text-[10px] font-semibold text-slate-700">Modèle 15</span>
 </button>
+
 <!-- 16. Modèle 16 -->
 <button type="button"
-    id="btn-tpl-modele16"
-    onclick="selectTemplate('modele16')"
-    class="template-card p-2 border-2 border-slate-200 bg-white rounded-lg text-center cursor-pointer transition hover:border-indigo-400">
-    <div class="h-10 rounded mb-1 flex flex-col overflow-hidden relative">
-        <div class="h-4 bg-[#52575D]"></div>
-        <div class="flex-1 flex">
-            <div class="w-1/3 bg-[#EBE7E1]"></div>
-            <div class="w-2/3 bg-white"></div>
-        </div>
+id="btn-tpl-modele16"
+onclick="selectTemplate('modele16')"
+class="template-card p-2 border-2 border-slate-200 bg-white rounded-lg text-center cursor-pointer transition hover:border-indigo-400">
+<div class="h-10 rounded mb-1 flex flex-col overflow-hidden relative">
+    <div class="h-4 bg-[#52575D]"></div>
+    <div class="flex-1 flex">
+        <div class="w-1/3 bg-[#EBE7E1]"></div>
+        <div class="w-2/3 bg-white"></div>
     </div>
-    <span class="text-[10px] font-semibold text-slate-700">Modèle 16</span>
+</div>
+<span class="text-[10px] font-semibold text-slate-700">Modèle 16</span>
 </button>
-</div>
-</div>
-<div class="section-card">
 
+</div>
+</div>
+
+<div class="section-card">
 <h3 class="section-title">
 <svg class="w-5 h-5 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
@@ -298,526 +282,653 @@ Informations
 </h3>
 
 <div>
-<label class="block text-xs font-semibold text-slate-600 mb-1">
-Nom complet
-</label>
+<label class="block text-xs font-semibold text-slate-600 mb-1">Nom complet</label>
 <input type="text" id="inputName" class="input-field" placeholder="Ex : Jean DUPONT">
 </div>
 
 <div>
-<label class="block text-xs font-semibold text-slate-600 mb-1">
-Photo d'identité
-</label>
-
+<label class="block text-xs font-semibold text-slate-600 mb-1">Photo d'identité</label>
 <label class="flex items-center justify-center w-full px-4 py-2 border-2 border-dashed border-slate-300 rounded-lg cursor-pointer hover:bg-slate-50 hover:border-indigo-400 transition-colors">
-
 <span class="text-sm text-slate-500 flex items-center gap-2">
 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
 </svg>
 Cliquer pour choisir une photo
 </span>
-
 <input type="file" id="inputPhotoFile" accept="image/*" class="hidden">
-
 </label>
 </div>
 
 <div>
-<label class="block text-xs font-semibold text-slate-600 mb-1">
-Email
-</label>
+<label class="block text-xs font-semibold text-slate-600 mb-1">Email</label>
 <input type="email" id="inputEmail" class="input-field" placeholder="Ex : email@domaine.com">
 </div>
 
 <div>
-<label class="block text-xs font-semibold text-slate-600 mb-1">
-Téléphone
-</label>
+<label class="block text-xs font-semibold text-slate-600 mb-1">Téléphone</label>
 <input type="text" id="inputPhone" class="input-field" placeholder="Ex : +261 34 00 000 00">
 </div>
 
 <div>
-<label class="block text-xs font-semibold text-slate-600 mb-1">
-Adresse
-</label>
+<label class="block text-xs font-semibold text-slate-600 mb-1">Adresse</label>
 <textarea id="inputAddress" rows="2" class="input-field resize-none" placeholder="Votre adresse complète"></textarea>
 </div>
 
 <div>
-<label class="block text-xs font-semibold text-slate-600 mb-1">
-Date de naissance
-</label>
+<label class="block text-xs font-semibold text-slate-600 mb-1">Date de naissance</label>
 <input type="text" id="inputBirthdate" class="input-field" placeholder="Ex : 01 janvier 1990">
 </div>
-
 </div>
 
 <div class="section-card">
-
-<h3 class="section-title">
-Profil professionnel
-</h3>
-
-<textarea id="inputSummary"
-rows="4"
-class="input-field resize-y min-h-[100px]"
-placeholder="Décrivez brièvement votre parcours, vos compétences et vos objectifs..."></textarea>
-
+<h3 class="section-title">Profil professionnel</h3>
+<textarea id="inputSummary" rows="4" class="input-field resize-y min-h-[100px]" placeholder="Décrivez brièvement votre parcours..."></textarea>
 </div>
-<!-- NOUVEAU BLOC : DIPLÔMES -->
-<div class="section-card">
 
+<div class="section-card">
     <div class="flex justify-between items-center">
-
-        <h3 class="section-title mb-0 border-none">
-            Diplômes
-        </h3>
-
-        <button type="button"
-            onclick="addDiplomeField()"
-            class="add-btn cursor-pointer">
-            + Ajouter
-        </button>
-
+        <h3 class="section-title mb-0 border-none">Diplômes</h3>
+        <button type="button" onclick="addDiplomeField()" class="add-btn cursor-pointer">+ Ajouter</button>
     </div>
-
     <div id="diplomesContainer" class="space-y-3 mt-3"></div>
-
 </div>
+
 <div class="section-card">
-
 <div class="flex justify-between items-center">
-
-<h3 class="section-title mb-0 border-none">
-Formations
-</h3>
-
-<button type="button"
-onclick="addFormationField()"
-class="add-btn cursor-pointer">
-+ Ajouter
-</button>
-
+<h3 class="section-title mb-0 border-none">Formations</h3>
+<button type="button" onclick="addFormationField()" class="add-btn cursor-pointer">+ Ajouter</button>
 </div>
-
 <div id="formationsContainer" class="space-y-3 mt-3"></div>
-
 </div>
 
 <div class="section-card">
-
 <div class="flex justify-between items-center">
-
-<h3 class="section-title mb-0 border-none">
-Expériences
-</h3>
-
-<button type="button"
-onclick="addExperienceField()"
-class="add-btn cursor-pointer">
-+ Ajouter
-</button>
-
+<h3 class="section-title mb-0 border-none">Expériences</h3>
+<button type="button" onclick="addExperienceField()" class="add-btn cursor-pointer">+ Ajouter</button>
 </div>
-
 <div id="experiencesContainer" class="space-y-3 mt-3"></div>
-
 </div>
 
 <div class="section-card">
-
-<h3 class="section-title">
-Compétences
-</h3>
-
-<input type="text"
-id="inputSkills"
-class="input-field"
-placeholder="Ex : Word, Excel, Gestion, Communication">
-
+<h3 class="section-title">Compétences</h3>
+<input type="text" id="inputSkills" class="input-field" placeholder="Ex : Word, Excel, Gestion">
 </div>
 
 <div class="section-card">
-
 <div class="flex justify-between items-center">
-
-<h3 class="section-title mb-0 border-none">
-Langues
-</h3>
-
-<button type="button"
-onclick="addLanguageField()"
-class="add-btn cursor-pointer">
-+ Ajouter
-</button>
-
+<h3 class="section-title mb-0 border-none">Langues</h3>
+<button type="button" onclick="addLanguageField()" class="add-btn cursor-pointer">+ Ajouter</button>
+</div>
+<div id="languagesContainer" class="space-y-3 mt-3"></div>
 </div>
 
-
-    <div id="languagesContainer" class="space-y-3 mt-3"></div>
-</div>
-
-<!-- NOUVEAU BLOC : CENTRES D'INTÉRÊT -->
 <div class="section-card">
-    <h3 class="section-title">
-        Centres d'intérêt
-    </h3>
-    <input type="text"
-        id="inputHobbies"
-        class="input-field"
-        placeholder="Ex : Lecture, Randonnée, Football (séparés par des virgules)">
+    <h3 class="section-title">Centres d'intérêt</h3>
+    <input type="text" id="inputHobbies" class="input-field" placeholder="Ex : Lecture, Football">
 </div>
+
 <div class="pt-2 space-y-3">
-
-<button id="downloadPdfBtn"
-type="button"
-onclick="openMvolaModal()"
-class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-xl transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer text-sm">
-
+<button id="downloadPdfBtn" type="button" onclick="openMvolaModal('cv')" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-xl transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer text-sm">
 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
 </svg>
-
 Générer le CV PDF
-
 </button>
-
 </div>
 
 </aside>
 
 <section class="lg:col-span-8 xl:col-span-9 flex justify-center items-start overflow-x-auto pb-10">
-
-<div id="cvPreview"
-class="cv-a4-page bg-white shadow-2xl ring-1 ring-slate-900/5">
-</div>
-
+<div id="cvPreview" class="cv-a4-page bg-white shadow-2xl ring-1 ring-slate-900/5"></div>
 </section>
-
 </main>
-<section
-    id="letterTabContent"
-    class="hidden max-w-7xl mx-auto">
 
+<!-- ONGLET LETTRE DE MOTIVATION -->
+<section id="letterTabContent" class="hidden max-w-7xl mx-auto">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
-
-        <!-- PANNEAU DE CONFIGURATION -->
-        <aside
-            class="lg:col-span-4 xl:col-span-3 bg-slate-50/50 p-6 rounded-2xl shadow-lg border border-slate-200 space-y-5 no-print">
-
+        <aside class="lg:col-span-4 xl:col-span-3 bg-slate-50/50 p-6 rounded-2xl shadow-lg border border-slate-200 space-y-5 no-print">
             <h2 class="text-xl font-extrabold text-slate-800 flex items-center gap-2">
                 <span class="text-2xl">✉️</span>
                 Lettre de motivation
             </h2>
-
             <p class="text-xs text-slate-500 leading-relaxed">
-                Créez automatiquement une lettre de motivation
-                personnalisée à partir des informations de votre CV.
+                Créez automatiquement une lettre de motivation personnalisée à partir des informations de votre CV.
             </p>
 
-            <!-- POSTE -->
             <div class="section-card">
-
-                <label class="block text-xs font-semibold text-slate-600 mb-1">
-                    Poste recherché *
-                </label>
-
-                <input
-                    type="text"
-                    id="letterJob"
-                    class="input-field"
-                    placeholder="Ex : Responsable commercial">
-
+                <label class="block text-xs font-semibold text-slate-600 mb-1">Poste recherché *</label>
+                <input type="text" id="letterJob" class="input-field" placeholder="Ex : Responsable commercial">
             </div>
 
-            <!-- ENTREPRISE -->
             <div class="section-card">
-
-                <label class="block text-xs font-semibold text-slate-600 mb-1">
-                    Entreprise
-                </label>
-
-                <input
-                    type="text"
-                    id="letterCompany"
-                    class="input-field"
-                    placeholder="Ex : ABC Madagascar">
-
+                <label class="block text-xs font-semibold text-slate-600 mb-1">Entreprise</label>
+                <input type="text" id="letterCompany" class="input-field" placeholder="Ex : ABC Madagascar">
             </div>
 
-            <!-- DESTINATAIRE -->
             <div class="section-card">
-
-                <label class="block text-xs font-semibold text-slate-600 mb-1">
-                    Destinataire
-                </label>
-
-                <input
-                    type="text"
-                    id="letterRecipient"
-                    class="input-field"
-                    placeholder="Ex : Madame la Directrice">
-
+                <label class="block text-xs font-semibold text-slate-600 mb-1">Destinataire</label>
+                <input type="text" id="letterRecipient" class="input-field" placeholder="Ex : Madame la Directrice">
             </div>
 
-            <!-- VILLE / DATE -->
             <div class="section-card">
-
-                <label class="block text-xs font-semibold text-slate-600 mb-1">
-                    Ville
-                </label>
-
-                <input
-                    type="text"
-                    id="letterCity"
-                    class="input-field"
-                    placeholder="Ex : Antananarivo">
-
+                <label class="block text-xs font-semibold text-slate-600 mb-1">Ville</label>
+                <input type="text" id="letterCity" class="input-field" placeholder="Ex : Antananarivo">
             </div>
 
-            <!-- TON -->
             <div class="section-card">
-
-                <label class="block text-xs font-semibold text-slate-600 mb-2">
-                    Style de la lettre
-                </label>
-
-                <select
-                    id="letterTone"
-                    class="input-field">
-
-                    <option value="professionnel">
-                        Professionnel
-                    </option>
-
-                    <option value="classique">
-                        Classique
-                    </option>
-
-                    <option value="dynamique">
-                        Dynamique
-                    </option>
-
-                    <option value="sobre">
-                        Sobre et élégant
-                    </option>
-
+                <label class="block text-xs font-semibold text-slate-600 mb-2">Style de la lettre</label>
+                <select id="letterTone" class="input-field">
+                    <option value="professionnel">Professionnel</option>
+                    <option value="classique">Classique</option>
+                    <option value="dynamique">Dynamique</option>
+                    <option value="sobre">Sobre et élégant</option>
                 </select>
-
             </div>
 
-            <!-- BOUTON GENERATION -->
-            <button
-                type="button"
-                onclick="createMotivationLetter()"
-                class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-xl transition-all shadow-md flex items-center justify-center gap-2">
-
+            <button type="button" onclick="createMotivationLetter()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-xl transition-all shadow-md flex items-center justify-center gap-2">
                 ✨ Créer ma lettre selon mon CV
-
             </button>
 
-            <!-- BOUTON RESET -->
-            <button
-                type="button"
-                onclick="resetMotivationLetter()"
-                class="w-full bg-white hover:bg-slate-50 text-slate-700 font-semibold py-2.5 px-4 rounded-xl border border-slate-200 transition-all">
-
+            <button type="button" onclick="resetMotivationLetter()" class="w-full bg-white hover:bg-slate-50 text-slate-700 font-semibold py-2.5 px-4 rounded-xl border border-slate-200 transition-all">
                 Réinitialiser
-
             </button>
-
         </aside>
 
-
-        <!-- APERCU LETTRE -->
-        <section
-            class="lg:col-span-8 xl:col-span-9 flex justify-center items-start overflow-x-auto pb-10">
-
+        <section class="lg:col-span-8 xl:col-span-9 flex justify-center items-start overflow-x-auto pb-10">
             <div class="w-full">
-
                 <div class="flex justify-between items-center mb-4 no-print">
-
                     <div>
-                        <h3 class="text-lg font-extrabold text-slate-800">
-                            Aperçu de votre lettre
-                        </h3>
-
-                        <p class="text-xs text-slate-500">
-                            Vous pouvez modifier directement le texte.
-                        </p>
+                        <h3 class="text-lg font-extrabold text-slate-800">Aperçu de votre lettre</h3>
+                        <p class="text-xs text-slate-500">Vous pouvez modifier directement le texte.</p>
                     </div>
 
-                    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-
-<!-- 2. Correction du bouton -->
-<button
-    type="button"
-    onclick="openMvolaModal('letter')"
-    class="bg-slate-900 hover:bg-slate-800 text-white px-4 py-2 rounded-lg text-xs font-bold shadow-md">
-    🖨️ Imprimer / PDF
-</button>
-
+                    <button type="button" onclick="openMvolaModal('letter')" class="bg-slate-900 hover:bg-slate-800 text-white px-4 py-2 rounded-lg text-xs font-bold shadow-md">
+                        🖨️ Imprimer / PDF
+                    </button>
                 </div>
 
-
-                <!-- PAGE A4 -->
-                <div
-                    id="motivationLetterPreview"
-                    class="motivation-letter-a4 bg-white shadow-2xl ring-1 ring-slate-900/5">
-
+                <div id="motivationLetterPreview" class="motivation-letter-a4 bg-white shadow-2xl ring-1 ring-slate-900/5">
                     <div class="letter-header">
-
                         <div>
-
-                            <h1 id="letterPreviewName">
-                                Votre Nom
-                            </h1>
-
-                            <div
-                                id="letterPreviewContact"
-                                class="letter-contact">
-                                email@email.com
-                            </div>
-
+                            <h1 id="letterPreviewName">Votre Nom</h1>
+                            <div id="letterPreviewContact" class="letter-contact">email@email.com</div>
                         </div>
-
-                        <div
-                            id="letterPreviewCityDate"
-                            class="letter-date">
-                        </div>
-
+                        <div id="letterPreviewCityDate" class="letter-date"></div>
                     </div>
-
 
                     <div class="letter-recipient">
-
-                        <div id="letterPreviewRecipient">
-                            À l'attention du responsable du recrutement
-                        </div>
-
-                        <div id="letterPreviewCompany">
-                        </div>
-
+                        <div id="letterPreviewRecipient">À l'attention du responsable du recrutement</div>
+                        <div id="letterPreviewCompany"></div>
                     </div>
 
-
-                    <div
-                        id="motivationLetterEditable"
-                        class="letter-body"
-                        contenteditable="true">
-
-                        <p>
-                            Votre lettre de motivation apparaîtra ici.
-                        </p>
-
+                    <div id="motivationLetterEditable" class="letter-body" contenteditable="true">
+                        <p>Votre lettre de motivation apparaîtra ici.</p>
                     </div>
-
 
                     <div class="letter-signature">
-
-                        <p>
-                            Cordialement,
-                        </p>
-
-                        <strong id="letterPreviewSignature">
-                            Votre Nom
-                        </strong>
-
+                        <p>Cordialement,</p>
+                        <strong id="letterPreviewSignature">Votre Nom</strong>
                     </div>
-
                 </div>
-
             </div>
-
         </section>
-
     </div>
-
 </section>
 
-<div id="mvolaModal"
-class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
-
-<div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-100">
-
-<div class="text-center">
-
-<div class="w-14 h-14 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold">
-📱
+<section id="demissionTabContent" class="hidden max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <aside class="lg:col-span-4 xl:col-span-3 bg-slate-50/50 p-6 rounded-2xl shadow-lg border border-slate-200 space-y-5 no-print">
+            <h2 class="text-xl font-extrabold text-slate-800 flex items-center gap-2">
+                <span class="text-2xl">🚪</span>
+                Lettre de démission
+            </h2>
+            <div class="section-card">
+    <label class="block text-xs font-semibold text-slate-600 mb-2">🌐 Langue du document</label>
+    <select id="docLanguage" class="input-field" onchange="updateAllDocumentPreviews()">
+        <option value="fr">Français</option>
+        <option value="mg">Malagasy (Malgache)</option>
+        <option value="en">English (Anglais)</option>
+    </select>
 </div>
+            <p class="text-xs text-slate-500 leading-relaxed">
+                Générez une lettre de démission formelle avec respect du préavis.
+            </p>
 
-<h3 id="mvolaModalTitle"
-class="text-xl font-extrabold text-slate-900 mb-2">
-CV généré avec succès !
-</h3>
+            <div class="section-card">
+                <label class="block text-xs font-semibold text-slate-600 mb-1">Poste occupé *</label>
+                <input type="text" id="demissionJob" class="input-field" placeholder="Ex : Comptable">
+            </div>
 
-<p id="mvolaModalText"
-class="text-xs text-slate-600 mb-6 leading-relaxed">
-Votre CV a été créé avec succès.
-</p>
+            <div class="section-card">
+                <label class="block text-xs font-semibold text-slate-600 mb-1">Nom de l'entreprise</label>
+                <input type="text" id="demissionCompany" class="input-field" placeholder="Ex : Société ABC">
+            </div>
 
+            <div class="section-card">
+                <label class="block text-xs font-semibold text-slate-600 mb-1">Durée du préavis</label>
+                <select id="demissionNotice" class="input-field">
+                    <option value="1_mois">1 mois</option>
+                    <option value="3_mois">3 mois</option>
+                    <option value="convenu">Selon accord mutuel / immédiat</option>
+                </select>
+            </div>
+
+            <div class="section-card">
+                <label class="block text-xs font-semibold text-slate-600 mb-1">Ville</label>
+                <input type="text" id="demissionCity" class="input-field" placeholder="Ex : Antananarivo">
+            </div>
+
+            <button type="button" onclick="createResignationLetter()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-xl transition-all shadow-md flex items-center justify-center gap-2">
+                ✨ Créer ma lettre de démission
+            </button>
+        </aside>
+
+        <section class="lg:col-span-8 xl:col-span-9 flex justify-center items-start overflow-x-auto pb-10">
+            <div class="w-full">
+                <div class="flex justify-between items-center mb-4 no-print">
+                    <div>
+                        <h3 class="text-lg font-extrabold text-slate-800">Aperçu de la démission</h3>
+                    </div>
+                    <button type="button" onclick="openMvolaModal('demission')" class="bg-slate-900 hover:bg-slate-800 text-white px-4 py-2 rounded-lg text-xs font-bold shadow-md">
+                        🖨️ Imprimer / PDF
+                    </button>
+                </div>
+
+                <div id="demissionPreview" class="motivation-letter-a4 bg-white shadow-2xl ring-1 ring-slate-900/5">
+                    <div class="letter-header">
+                        <div>
+                            <h1 id="demissionPreviewName">Votre Nom</h1>
+                            <div id="demissionPreviewContact" class="letter-contact">email@email.com</div>
+                        </div>
+                        <div id="demissionPreviewCityDate" class="letter-date"></div>
+                    </div>
+
+                    <div class="letter-recipient">
+                        <div class="font-bold">À la Direction des Ressources Humaines</div>
+                        <div id="demissionPreviewCompany"></div>
+                    </div>
+
+                    <div class="letter-objet-block my-4">
+                        <strong>Objet :</strong> <span id="demissionPreviewObjet">Démission de mon poste</span>
+                    </div>
+
+                    <div id="demissionEditable" class="letter-body" contenteditable="true">
+                        <p>Votre lettre de démission apparaîtra ici...</p>
+                    </div>
+
+                    <div class="letter-signature">
+                        <p>Cordialement,</p>
+                        <strong id="demissionPreviewSignature">Votre Nom</strong>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</section>
+<!-- ONGLET DEMANDE D'EMPLOI -->
+<section id="demandeTabContent" class="hidden max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <aside class="lg:col-span-4 xl:col-span-3 bg-slate-50/50 p-6 rounded-2xl shadow-lg border border-slate-200 space-y-5 no-print">
+            <h2 class="text-xl font-extrabold text-slate-800 flex items-center gap-2">
+                <span class="text-2xl">📝</span>
+                Demande d'emploi
+            </h2>
+            <p class="text-xs text-slate-500 leading-relaxed">
+                Générez une demande d'emploi formelle et officielle selon les normes administratives à partir de votre CV.
+            </p>
+
+            <div class="section-card">
+                <label class="block text-xs font-semibold text-slate-600 mb-1">Poste sollicité *</label>
+                <input type="text" id="demandeJob" class="input-field" placeholder="Ex : Agent administratif">
+            </div>
+
+            <div class="section-card">
+                <label class="block text-xs font-semibold text-slate-600 mb-1">Organisme / Société</label>
+                <input type="text" id="demandeCompany" class="input-field" placeholder="Ex : Ministère ou Entreprise XYZ">
+            </div>
+
+            <div class="section-card">
+                <label class="block text-xs font-semibold text-slate-600 mb-1">Autorité destinataire</label>
+                <input type="text" id="demandeRecipient" class="input-field" placeholder="Ex : Monsieur le Directeur Général">
+            </div>
+
+            <div class="section-card">
+                <label class="block text-xs font-semibold text-slate-600 mb-1">Lieu / Ville</label>
+                <input type="text" id="demandeCity" class="input-field" placeholder="Ex : Antananarivo">
+            </div>
+
+            <div class="section-card">
+                <label class="block text-xs font-semibold text-slate-600 mb-1">Objet de la demande</label>
+                <input type="text" id="demandeObjet" class="input-field" placeholder="Ex : Demande d'emploi au poste de...">
+            </div>
+
+            <div class="section-card">
+                <label class="block text-xs font-semibold text-slate-600 mb-2">Formule de candidature</label>
+                <select id="demandeType" class="input-field">
+                    <option value="officielle">Demande administrative officielle</option>
+                    <option value="spontanee">Candidature spontanée</option>
+                    <option value="reponse_offre">En réponse à une offre</option>
+                    <option value="stage">Demande de stage</option>
+                </select>
+            </div>
+
+            <button type="button" onclick="createJobApplication()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-xl transition-all shadow-md flex items-center justify-center gap-2">
+                ✨ Créer ma demande d'emploi
+            </button>
+
+            <button type="button" onclick="resetJobApplication()" class="w-full bg-white hover:bg-slate-50 text-slate-700 font-semibold py-2.5 px-4 rounded-xl border border-slate-200 transition-all">
+                Réinitialiser
+            </button>
+        </aside>
+
+        <section class="lg:col-span-8 xl:col-span-9 flex justify-center items-start overflow-x-auto pb-10">
+            <div class="w-full">
+                <div class="flex justify-between items-center mb-4 no-print">
+                    <div>
+                        <h3 class="text-lg font-extrabold text-slate-800">Aperçu de votre demande d'emploi</h3>
+                        <p class="text-xs text-slate-500">Vous pouvez modifier directement le texte sur la feuille A4.</p>
+                    </div>
+
+                    <button type="button" onclick="openMvolaModal('demande')" class="bg-slate-900 hover:bg-slate-800 text-white px-4 py-2 rounded-lg text-xs font-bold shadow-md">
+                        🖨️ Imprimer / PDF
+                    </button>
+                </div>
+
+                <div id="jobApplicationPreview" class="demande-letter-a4 bg-white shadow-2xl ring-1 ring-slate-900/5">
+                    <div class="demande-header">
+                        <div class="demande-sender">
+                            <h1 id="demandePreviewName">Votre Nom</h1>
+                            <div id="demandePreviewContact" class="demande-contact">email@email.com</div>
+                        </div>
+
+                        <div id="demandePreviewCityDate" class="demande-date"></div>
+                    </div>
+
+                    <div class="demande-recipient-block">
+                        <div id="demandePreviewRecipient" class="font-bold">À Monsieur le Directeur Général</div>
+                        <div id="demandePreviewCompany"></div>
+                    </div>
+
+                    <div class="demande-objet-block">
+                        <strong>Objet :</strong> <span id="demandePreviewObjet">Demande d'emploi</span>
+                    </div>
+
+                    <div id="jobApplicationEditable" class="demande-body" contenteditable="true">
+                        <p>Votre demande d'emploi rédigée apparaîtra ici...</p>
+                    </div>
+
+                    <div class="demande-signature">
+                        <p>L'intéressé(e),</p>
+                        <br>
+                        <strong id="demandePreviewSignature">Votre Nom</strong>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</section>
+<!-- ONGLET FAIRE-PART DECES -->
+<section id="decesTabContent" class="hidden max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <!-- Formulaire de saisie à gauche -->
+        <aside class="lg:col-span-4 xl:col-span-3 bg-slate-50/50 p-6 rounded-2xl shadow-lg border border-slate-200 space-y-5 no-print overflow-y-auto max-h-[85vh] sticky top-8">
+            <h2 class="text-xl font-extrabold text-slate-800 flex items-center gap-2">
+                <span class="text-2xl">🪦</span>
+                Faire-part de Décès
+            </h2>
+
+            <!-- Choix du modèle -->
+            <div class="section-card">
+                <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Choisissez un modèle</label>
+                <div class="grid grid-cols-2 gap-2">
+                    <button type="button" id="btn-deces-tpl-modele1" onclick="selectDecesModel('modele1')" class="deces-tpl-btn p-2 border-2 rounded-lg text-center cursor-pointer transition ring-4 ring-indigo-600 border-indigo-600 bg-indigo-50">
+                        <div class="h-8 bg-slate-200 rounded mb-1 flex items-center justify-center text-[10px] font-bold text-slate-700">Modèle 1</div>
+                        <span class="text-[10px] font-semibold text-slate-700">Français / Croix</span>
+                    </button>
+
+                    <button type="button" id="btn-deces-tpl-modele2" onclick="selectDecesModel('modele2')" class="deces-tpl-btn p-2 border-2 border-slate-200 bg-white rounded-lg text-center cursor-pointer transition hover:border-indigo-400">
+                        <div class="h-8 bg-amber-100 rounded mb-1 flex items-center justify-center text-[10px] font-bold text-amber-800">Modèle 2</div>
+                        <span class="text-[10px] font-semibold text-slate-700">Malagasy / Photo G.</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="section-card space-y-3">
+                <h3 class="section-title">Informations du Défunt</h3>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Nom complet *</label>
+                    <input type="text" id="decesName" class="input-field" placeholder="Ex : ANDRIAMANANTENA Bera">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Surnom / Pseudonyme (ex: Rasyl)</label>
+                    <input type="text" id="decesAlias" class="input-field" placeholder="Ex : (A.S. Rasyl)">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Précisions / Titres honorifiques</label>
+                    <textarea id="decesTitles" rows="2" class="input-field" placeholder="Membre titulaire de l'Académie..."></textarea>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Photo du défunt</label>
+                    <input type="file" id="decesPhotoFile" accept="image/*" class="input-field text-xs">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Date et lieu du décès</label>
+                    <input type="text" id="decesDateLieu" class="input-field" placeholder="Ex : dia nodimandry ny Alarobia 4 Septambra 2024...">
+                </div>
+            </div>
+
+            <div class="section-card space-y-3">
+                <h3 class="section-title">Membres de la Famille</h3>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Ny vadiny / Épouse</label>
+                    <input type="text" id="decesEpouse" class="input-field" placeholder="rakotomody era...">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Ny zanany / Enfants</label>
+                    <textarea id="decesEnfants" rows="2" class="input-field" placeholder="rakoto mody sy..."></textarea>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Ny zafiny / Petits-enfants</label>
+                    <textarea id="decesZafiny" rows="2" class="input-field" placeholder="Iloniaina, Toniaina..."></textarea>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Ny parents / Ny iray tampo amin'ny défunt</label>
+                    <textarea id="decesFreresSoeurs" rows="2" class="input-field" placeholder="Terak' Itpkl RASAMITSOA..."></textarea>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Ny iray tampo amin'ny vadiny</label>
+                    <textarea id="decesIrayTampoVady" rows="2" class="input-field" placeholder="RABENJA mivady..."></textarea>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Ny Mpiara-miasa aminy</label>
+                    <input type="text" id="decesMpiaraMiasa" class="input-field" placeholder="Jimmy, Rafilipo, Rasoa...">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Ny havany</label>
+                    <textarea id="decesHavany" rows="2" class="input-field" placeholder="Taranak' ANDRIAMANANTENA G...."></textarea>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Ny Mpitandrina sy Fiangonana / Fokontany</label>
+                    <textarea id="decesMpitandrina" rows="2" class="input-field" placeholder="Ny Mpitandrina sy ny Fiangonana FJKM..."></textarea>
+                </div>
+            </div>
+
+            <div class="section-card space-y-3">
+                <h3 class="section-title">Programme & Verset</h3>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Détails funéraires (Veillée, messe, enterrement)</label>
+                    <textarea id="decesDetails" rows="4" class="input-field" placeholder="Ny nofony dia hiala ao an-tranony..."></textarea>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Verset biblique</label>
+                    <select id="decesVersetSelect" class="input-field" onchange="onVersetChange()">
+                        <option value="jaona">« Andriamanitra dia fitiavana... » (1 Jaona 4:16)</option>
+                        <option value="timothee">« J'ai combattu le bon combat... » (2 Timothée 4:7)</option>
+                        <option value="jean">« Je suis la résurrection et la vie... » (Jean 11:25)</option>
+                        <option value="psaume">« L'Eternel est mon berger... » (Psaume 23:1)</option>
+                        <option value="custom">Autre verset personnalisé...</option>
+                    </select>
+                </div>
+                <div id="decesCustomVersetContainer" class="hidden space-y-2">
+                    <input type="text" id="decesCustomVerset" class="input-field" placeholder="Texte du verset">
+                    <input type="text" id="decesCustomVersetRef" class="input-field" placeholder="Référence (ex: Psaume 23:1)">
+                </div>
+            </div>
+
+            <button type="button" onclick="createDecesLetter()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-xl transition-all shadow-md flex items-center justify-center gap-2">
+                ✨ Créer le faire-part de décès
+            </button>
+        </aside>
+
+        <!-- Aperçu à droite -->
+        <section class="lg:col-span-8 xl:col-span-9 flex justify-center items-start overflow-x-auto pb-10">
+            <div class="w-full">
+                <div class="flex justify-between items-center mb-4 no-print">
+                    <div>
+                        <h3 class="text-lg font-extrabold text-slate-800">Aperçu du Faire-part de décès</h3>
+                        <p class="text-xs text-slate-500">Vous pouvez modifier directement le texte sur la feuille A4.</p>
+                    </div>
+
+                    <button type="button" onclick="openMvolaModal('deces')" class="bg-slate-900 hover:bg-slate-800 text-white px-4 py-2 rounded-lg text-xs font-bold shadow-md flex items-center gap-2">
+                        🖨️ Imprimer / PDF
+                    </button>
+                </div>
+
+                <div id="decesPreview" class="deces-a4-page bg-white shadow-2xl ring-1 ring-slate-900/5">
+                </div>
+            </div>
+        </section>
+    </div>
+</section>
+
+<!-- ONGLET INVITATION MARIAGE -->
+<section id="mariageTabContent" class="hidden max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <!-- Formulaire de saisie à gauche -->
+        <aside class="lg:col-span-4 xl:col-span-3 bg-slate-50/50 p-6 rounded-2xl shadow-lg border border-slate-200 space-y-5 no-print overflow-y-auto max-h-[85vh] sticky top-8">
+            <h2 class="text-xl font-extrabold text-slate-800 flex items-center gap-2">
+                <span class="text-2xl">💍</span>
+                Faire-part de Mariage
+            </h2>
+
+            <div class="section-card space-y-3">
+                <h3 class="section-title">Les Familles</h3>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Famille du Marié</label>
+                    <input type="text" id="mariageFamilleMarie" class="input-field" placeholder="Ex : KOTO & BOZY">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Famille de la Mariée</label>
+                    <input type="text" id="mariageFamilleMariee" class="input-field" placeholder="Ex : BELA & BOLA">
+                </div>
+            </div>
+
+            <div class="section-card space-y-3">
+                <h3 class="section-title">Les Mariés</h3>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Prénom du Marié *</label>
+                    <input type="text" id="mariageNomMarie" class="input-field" placeholder="Ex : Lahy">
+                </div>
+                
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Prénom de la Mariée *</label>
+                    <input type="text" id="mariageNomMariee" class="input-field" placeholder="Ex : Vavy">
+                </div>
+            </div>
+            <div class="section-card space-y-3">
+    <h3 class="section-title">Design & Image de Fond</h3>
+    <div>
+        <label class="block text-xs font-semibold text-slate-600 mb-1">Image de fond / Cadre floral (PNG/JPG)</label>
+        <input type="file" id="mariageBgFile" accept="image/*" class="input-field text-xs">
+        <p class="text-[10px] text-slate-400 mt-1">Importez une image de cadre floral ou un fond aquarelle sans texte.</p>
+    </div>
 </div>
-
-<div class="bg-amber-50 p-4 rounded-xl border border-amber-200 mb-6 space-y-2 text-xs text-slate-800">
-
-<p class="font-bold text-amber-900">
-💡 Si vous voulez faire un don MVola :
-</p>
-
-<ol class="list-decimal list-inside space-y-1 text-slate-700">
-
-<li>
-Effectuez le transfert MVola au :
-<strong class="text-slate-900 font-mono">
-034.97.981.95
-</strong>
-</li>
-
-<li>
-Raison :
-<strong>CV</strong>
-</li>
-
-</ol>
-
+<div class="section-card space-y-3">
+    <h3 class="section-title">Photo des Mariés</h3>
+    <div>
+        <label class="block text-xs font-semibold text-slate-600 mb-1">Choisir une photo</label>
+        <input type="file" id="mariagePhotoFile" accept="image/*" class="input-field text-xs">
+    </div>
 </div>
+            <div class="section-card space-y-3">
+                <h3 class="section-title">Programme du Mariage</h3>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Mariage Civil (Date, heure, lieu)</label>
+                    <textarea id="mariageCivil" rows="2" class="input-field" placeholder="Samedi 17 Octobre 2026 à 10h, à Firaisana I Analakely."></textarea>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Mariage Coutumier / Religieux</label>
+                    <textarea id="mariageCoutumier" rows="3" class="input-field" placeholder="Samedi 17 Oct 2026 à 12h, au Carlton..."></textarea>
+                </div>
+            </div>
 
-<div class="flex justify-center mt-6 mb-4">
+            <div class="section-card space-y-3">
+                <h3 class="section-title">Message & Consignes</h3>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Message d'accueil & Liste de cadeaux</label>
+                    <textarea id="mariageMessage" rows="3" class="input-field" placeholder="Votre présence contribuera à notre bonheur..."></textarea>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Note particulière (NB)</label>
+                    <input type="text" id="mariageNB" class="input-field" placeholder="NB: L'invité est prié de ne pas inviter.">
+                </div>
+            </div>
 
-<button id="modalDownloadPdfBtn"
-type="button"
-onclick="downloadPDF()"
-class="bg-[#6B5B52] hover:bg-[#52453e] text-white font-semibold py-3 px-6 rounded-xl shadow-md transition-all duration-300 flex items-center gap-2 cursor-pointer">
+            <button type="button" onclick="createMariageLetter()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-xl transition-all shadow-md flex items-center justify-center gap-2">
+                ✨ Créer l'invitation de mariage
+            </button>
+        </aside>
 
-<svg xmlns="http://www.w3.org/2000/svg"
-class="h-5 w-5"
-fill="none"
-viewBox="0 0 24 24"
-stroke="currentColor">
+        <!-- Aperçu à droite -->
+        <section class="lg:col-span-8 xl:col-span-9 flex justify-center items-start overflow-x-auto pb-10">
+            <div class="w-full">
+                <div class="flex justify-between items-center mb-4 no-print">
+                    <div>
+                        <h3 class="text-lg font-extrabold text-slate-800">Aperçu de l'Invitation de Mariage</h3>
+                        <p class="text-xs text-slate-500">Vous pouvez modifier directement le texte sur la feuille A4.</p>
+                    </div>
 
-<path stroke-linecap="round"
-stroke-linejoin="round"
-stroke-width="2"
-d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l4 4m0 0l-4-4m4 4V4"/>
+                    <button type="button" onclick="openMvolaModal('mariage')" class="bg-slate-900 hover:bg-slate-800 text-white px-4 py-2 rounded-lg text-xs font-bold shadow-md flex items-center gap-2">
+                        🖨️ Imprimer / PDF
+                    </button>
+                </div>
 
-</svg>
+                <div id="mariagePreview" class="mariage-a4-page bg-white shadow-2xl ring-1 ring-slate-900/5">
+                </div>
+            </div>
+        </section>
+    </div>
+</section>
+<!-- MODALE MVOLA / TELECHARGEMENT -->
+<div id="mvolaModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
+    <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-100">
+        <div class="text-center">
+            <div class="w-14 h-14 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold">📱</div>
+            <h3 id="mvolaModalTitle" class="text-xl font-extrabold text-slate-900 mb-2">CV généré avec succès !</h3>
+            <p id="mvolaModalText" class="text-xs text-slate-600 mb-6 leading-relaxed">Votre document a été créé avec succès.</p>
+        </div>
 
-Télécharger mon CV en PDF
+        <div class="bg-amber-50 p-4 rounded-xl border border-amber-200 mb-6 space-y-2 text-xs text-slate-800">
+            <p class="font-bold text-amber-900">💡 Si vous voulez faire un don MVola :</p>
+            <ol class="list-decimal list-inside space-y-1 text-slate-700">
+                <li>Effectuez le transfert MVola au : <strong class="text-slate-900 font-mono">034.97.981.95</strong></li>
+                <li>Raison : <strong>CV</strong></li>
+            </ol>
+        </div>
 
-</button>
+        <div class="flex justify-center mt-6 mb-4">
+            <button id="modalDownloadPdfBtn" type="button" onclick="downloadPDF()" class="bg-[#6B5B52] hover:bg-[#52453e] text-white font-semibold py-3 px-6 rounded-xl shadow-md transition-all duration-300 flex items-center gap-2 cursor-pointer">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l4 4m0 0l-4-4m4 4V4"/>
+                </svg>
+                Télécharger le PDF
+            </button>
+        </div>
 
-</div>
-
-<button type="button"
-onclick="closeMvolaModal()"
-class="w-full bg-slate-900 hover:bg-slate-800 text-white font-semibold py-3 px-4 rounded-xl transition-all text-xs shadow-md cursor-pointer">
-
-J'ai compris / Fermer
-
-</button>
-
-</div>
+        <button type="button" onclick="closeMvolaModal()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-semibold py-3 px-4 rounded-xl transition-all text-xs shadow-md cursor-pointer">
+            J'ai compris / Fermer
+        </button>
+    </div>
 </div>
 
 <script src="script.js"></script>
@@ -831,6 +942,7 @@ J'ai compris / Fermer
 <script src="modele8.js"></script>
 <script src="modele9.js"></script>
 <script src="lettre.js"></script>
+<script src="demande.js"></script>
 <script src="modele10.js"></script>
 <script src="modele11.js"></script>
 <script src="modele12.js"></script>
@@ -838,5 +950,9 @@ J'ai compris / Fermer
 <script src="modele14.js"></script>
 <script src="modele15.js"></script>
 <script src="modele16.js"></script>
+<script src="demission.js"></script>
+<script src="decesmodele1.js"></script>
+<script src="decesmodele2.js"></script>
+<script src="mariage1.js"></script>
 </body>
 </html>

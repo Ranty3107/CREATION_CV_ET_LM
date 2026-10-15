@@ -6,7 +6,6 @@ let languages=[];
 let selectedCVColor='#3B5998';
 let diplomes=[];
 const CV_COLOR_PRESETS=['#3B5998','#2563EB','#4F46E5','#7C3AED','#9333EA','#DB2777','#DC2626','#EA580C','#D97706','#16A34A','#059669','#0891B2','#0F766E','#475569','#1F2937'];
-const GOOGLE_SCRIPT_URL="https://script.google.com/macros/s/AKfycbwSVrWGRzoXjU5OmAS1iHpE2L_d9moFI9WMKRUtgYhkXjNOjlkfhdUefXaa2Meym31/exec";
 
 document.addEventListener('DOMContentLoaded',()=>{
     const photoInput=document.getElementById('inputPhotoFile');
@@ -28,9 +27,21 @@ document.addEventListener('DOMContentLoaded',()=>{
 
     inputIds.forEach(id=>{
         const element=document.getElementById(id);
-
         if(element){
             element.addEventListener('input',renderCV);
+        }
+    });
+
+    // Écouteurs pour la demande d'emploi
+    const demandeInputIds = ['demandeJob', 'demandeCompany', 'demandeRecipient', 'demandeCity', 'demandeObjet'];
+    demandeInputIds.forEach(id => {
+        const el = document.getElementById(id);
+        if(el) {
+            el.addEventListener('input', () => {
+                if (typeof updateJobApplicationPreview === 'function') {
+                    updateJobApplicationPreview();
+                }
+            });
         }
     });
 
@@ -47,7 +58,6 @@ document.addEventListener('DOMContentLoaded',()=>{
 
 function handlePhotoUpload(event){
     const file=event.target.files&&event.target.files[0];
-
     if(!file)return;
 
     if(!file.type.startsWith('image/')){
@@ -57,16 +67,13 @@ function handlePhotoUpload(event){
     }
 
     const reader=new FileReader();
-
     reader.onload=function(e){
         photoBase64=e.target.result||'';
         renderCV();
     };
-
     reader.onerror=function(){
         alert('Impossible de lire cette image.');
     };
-
     reader.readAsDataURL(file);
 }
 
@@ -86,42 +93,24 @@ function getInputValue(id){
     return element?element.value.trim():'';
 }
 
-function selectTemplate(templateId){ const validTemplates=[ 'modern', 'banner', 'minimalist', 'headerCenter', 'darkSidebar', 'modernBlue', 'bannerBlue', 'sidebarBlue', 'waveRed', 'left-sidebar', 'modele10', 'modele11', 'modele12', 'modele13', 'modele14', 'modele15', 'modele16']; if(!validTemplates.includes(templateId)){ templateId='modern'; } currentTemplate=templateId; updateTemplateButtons(); renderCV(); }
+function selectTemplate(templateId){
+    const validTemplates=[ 'modern', 'banner', 'minimalist', 'headerCenter', 'darkSidebar', 'modernBlue', 'bannerBlue', 'sidebarBlue', 'waveRed', 'left-sidebar', 'modele10', 'modele11', 'modele12', 'modele13', 'modele14', 'modele15', 'modele16'];
+    if(!validTemplates.includes(templateId)){ templateId='modern'; }
+    currentTemplate=templateId;
+    updateTemplateButtons();
+    renderCV();
+}
 
 function updateTemplateButtons(){
-
     document.querySelectorAll('.template-card').forEach(button=>{
-        button.classList.remove(
-            'ring-4',
-            'ring-indigo-600',
-            'border-indigo-600',
-            'bg-indigo-50',
-            'shadow-lg'
-        );
-
-        button.classList.add(
-            'border-slate-200',
-            'bg-white'
-        );
+        button.classList.remove('ring-4', 'ring-indigo-600', 'border-indigo-600', 'bg-indigo-50', 'shadow-lg');
+        button.classList.add('border-slate-200', 'bg-white');
     });
 
-    const active=document.getElementById(
-        'btn-tpl-'+currentTemplate
-    );
-
+    const active=document.getElementById('btn-tpl-'+currentTemplate);
     if(active){
-        active.classList.remove(
-            'border-slate-200',
-            'bg-white'
-        );
-
-        active.classList.add(
-            'ring-4',
-            'ring-indigo-600',
-            'border-indigo-600',
-            'bg-indigo-50',
-            'shadow-lg'
-        );
+        active.classList.remove('border-slate-200', 'bg-white');
+        active.classList.add('ring-4', 'ring-indigo-600', 'border-indigo-600', 'bg-indigo-50', 'shadow-lg');
     }
 }
 
@@ -133,64 +122,27 @@ function collectCandidateData(){
     const lastName=parts.length>1?parts.slice(1).join(' '):'';
 
     const skillsRaw=getInputValue('inputSkills');
-
-    const skillsList=skillsRaw
-        ?skillsRaw
-            .split(',')
-            .map(s=>s.trim())
-            .filter(Boolean)
-        :[];
+    const skillsList=skillsRaw ? skillsRaw.split(',').map(s=>s.trim()).filter(Boolean) : [];
 
     const hobbiesRaw=getInputValue('inputHobbies');
-
-    const hobbiesList=hobbiesRaw
-        ?hobbiesRaw
-            .split(',')
-            .map(s=>s.trim())
-            .filter(Boolean)
-        :[];
+    const hobbiesList=hobbiesRaw ? hobbiesRaw.split(',').map(s=>s.trim()).filter(Boolean) : [];
 
     return{
         name:escapeHTML(rawName),
         firstName:escapeHTML(firstName),
         lastName:escapeHTML(lastName),
-
         email:escapeHTML(getInputValue('inputEmail')),
         phone:escapeHTML(getInputValue('inputPhone')),
-
-        address:escapeHTML(
-            getInputValue('inputAddress')
-        ).replace(/\n/g,'<br>'),
-
-        birthdate:escapeHTML(
-            getInputValue('inputBirthdate')
-        ),
-
-        summary:escapeHTML(
-            getInputValue('inputSummary')
-        ).replace(/\n/g,'<br>'),
-
+        address:escapeHTML(getInputValue('inputAddress')).replace(/\n/g,'<br>'),
+        birthdate:escapeHTML(getInputValue('inputBirthdate')),
+        summary:escapeHTML(getInputValue('inputSummary')).replace(/\n/g,'<br>'),
         skillsRaw:skillsRaw,
         skillsList:skillsList,
-
         hobbies:hobbiesList,
-
-        formations:Array.isArray(formations)
-            ?formations
-            :[],
-
-        experiences:Array.isArray(experiences)
-            ?experiences
-            :[],
-
-        languages:Array.isArray(languages)
-            ?languages
-            :[],
-
-        diplomes:Array.isArray(diplomes)
-            ?diplomes
-            :[],
-
+        formations:Array.isArray(formations)?formations:[],
+        experiences:Array.isArray(experiences)?experiences:[],
+        languages:Array.isArray(languages)?languages:[],
+        diplomes:Array.isArray(diplomes)?diplomes:[],
         photoDataUrl:photoBase64
     };
 }
@@ -203,36 +155,11 @@ function renderDiplomesInputs(){
     diplomes.forEach((dip,index)=>{
         const block=document.createElement('div');
         block.className='p-2 border rounded bg-gray-50 space-y-1 relative text-xs';
-
         block.innerHTML=`
-            <button
-                type="button"
-                onclick="removeDiplome(${index})"
-                class="absolute top-1 right-1 text-red-500 font-bold text-xs hover:text-red-700 cursor-pointer"
-                title="Supprimer">
-                ✕
-            </button>
-
-            <input
-                type="text"
-                placeholder="Intitulé du diplôme"
-                value="${escapeHTML(dip.title)}"
-                oninput="updateDiplome(${index},'title',this.value)"
-                class="w-full border rounded p-1">
-
-            <input
-                type="text"
-                placeholder="Établissement / École"
-                value="${escapeHTML(dip.school)}"
-                oninput="updateDiplome(${index},'school',this.value)"
-                class="w-full border rounded p-1">
-
-            <input
-                type="text"
-                placeholder="Année d'obtention"
-                value="${escapeHTML(dip.year)}"
-                oninput="updateDiplome(${index},'year',this.value)"
-                class="w-full border rounded p-1">
+            <button type="button" onclick="removeDiplome(${index})" class="absolute top-1 right-1 text-red-500 font-bold text-xs hover:text-red-700 cursor-pointer" title="Supprimer">✕</button>
+            <input type="text" placeholder="Intitulé du diplôme" value="${escapeHTML(dip.title)}" oninput="updateDiplome(${index},'title',this.value)" class="w-full border rounded p-1">
+            <input type="text" placeholder="Établissement / École" value="${escapeHTML(dip.school)}" oninput="updateDiplome(${index},'school',this.value)" class="w-full border rounded p-1">
+            <input type="text" placeholder="Année d'obtention" value="${escapeHTML(dip.year)}" oninput="updateDiplome(${index},'year',this.value)" class="w-full border rounded p-1">
         `;
         container.appendChild(block);
     });
@@ -265,6 +192,7 @@ function getValidDiplomes(){
     );
 }
 
+// Fonction centrale unifiée pour rendre le CV selon le modèle
 function renderCV(){ 
     const cvPreview = document.getElementById('cvPreview'); 
     if(!cvPreview) return; 
@@ -1167,7 +1095,10 @@ async function downloadPDF() {
         printMotivationLetter();
         return;
     }
-
+if (pendingDownloadType === 'deces') {
+        window.print(); // Imprime directement le faire-part format A4
+        return;
+    }
     const cv = document.getElementById('cvPreview');
     if (!cv) {
         alert('Impossible de trouver le CV à imprimer.');
@@ -1230,52 +1161,52 @@ function formatCVText(text){
    ========================================================= */
 
 function switchMainTab(tab){
+    const cvTab = document.getElementById('cvTabContent');
+    const letterTab = document.getElementById('letterTabContent');
+    const demandeTab = document.getElementById('demandeTabContent');
+    const demissionTab = document.getElementById('demissionTabContent');
+    const decesTab = document.getElementById('decesTabContent');
+    const mariageTab = document.getElementById('mariageTabContent'); // <--- AJOUT
 
-    const cvTab=document.getElementById('cvTabContent');
-    const letterTab=document.getElementById('letterTabContent');
+    const tabs = [cvTab, letterTab, demandeTab, demissionTab, decesTab, mariageTab];
+    tabs.forEach(t => { if(t) t.classList.add('hidden'); });
 
-    const cvBtn=document.getElementById('tabCvBtn');
-    const letterBtn=document.getElementById('tabLetterBtn');
+    const cvBtn = document.getElementById('tabCvBtn');
+    const letterBtn = document.getElementById('tabLetterBtn');
+    const demandeBtn = document.getElementById('tabDemandeBtn');
+    const demissionBtn = document.getElementById('tabDemissionBtn');
+    const decesBtn = document.getElementById('tabDecesBtn');
+    const mariageBtn = document.getElementById('tabMariageBtn'); // <--- AJOUT
 
-    if(!cvTab||!letterTab)return;
+    const btnInactive = 'px-5 py-2.5 rounded-xl bg-white text-slate-600 border border-slate-200 font-bold text-sm hover:border-indigo-400 transition-all';
+    const btnActive = 'px-5 py-2.5 rounded-xl bg-indigo-600 text-white font-bold text-sm shadow-md transition-all';
 
-    if(tab==='letter'){
+    [cvBtn, letterBtn, demandeBtn, demissionBtn, decesBtn, mariageBtn].forEach(b => { if(b) b.className = btnInactive; });
 
-        cvTab.classList.add('hidden');
+    if(tab === 'letter' && letterTab){
         letterTab.classList.remove('hidden');
-
-        if(cvBtn){
-            cvBtn.className=
-                'px-5 py-2.5 rounded-xl bg-white text-slate-600 border border-slate-200 font-bold text-sm hover:border-indigo-400 transition-all';
-        }
-
-        if(letterBtn){
-            letterBtn.className=
-                'px-5 py-2.5 rounded-xl bg-indigo-600 text-white font-bold text-sm shadow-md transition-all';
-        }
-
-        updateMotivationLetterPreview();
-
-    }else{
-
-        letterTab.classList.add('hidden');
+        if(letterBtn) letterBtn.className = btnActive;
+        if(typeof updateMotivationLetterPreview === 'function') updateMotivationLetterPreview();
+    } else if(tab === 'demande' && demandeTab){
+        demandeTab.classList.remove('hidden');
+        if(demandeBtn) demandeBtn.className = btnActive;
+    } else if(tab === 'demission' && demissionTab){
+        demissionTab.classList.remove('hidden');
+        if(demissionBtn) demissionBtn.className = btnActive;
+    } else if(tab === 'deces' && decesTab){
+        decesTab.classList.remove('hidden');
+        if(decesBtn) decesBtn.className = btnActive;
+        if(typeof createDecesLetter === 'function') createDecesLetter();
+    } else if(tab === 'mariage' && mariageTab){ // <--- AJOUT
+        mariageTab.classList.remove('hidden');
+        if(mariageBtn) mariageBtn.className = btnActive;
+        if(typeof createMariageLetter === 'function') createMariageLetter();
+    } else if(cvTab){
         cvTab.classList.remove('hidden');
-
-        if(cvBtn){
-            cvBtn.className=
-                'px-5 py-2.5 rounded-xl bg-indigo-600 text-white font-bold text-sm shadow-md transition-all';
-        }
-
-        if(letterBtn){
-            letterBtn.className=
-                'px-5 py-2.5 rounded-xl bg-white text-slate-600 border border-slate-200 font-bold text-sm hover:border-indigo-400 transition-all';
-        }
-
+        if(cvBtn) cvBtn.className = btnActive;
         renderCV();
     }
 }
-
-
 /* =========================================================
    DONNÉES DU CV POUR LA LETTRE
    ========================================================= */
@@ -1406,4 +1337,87 @@ function buildDiplomesSection(color){
     });
 
     return html+'</div>';
+}
+// Charger les données sauvegardées au démarrage
+function loadFromLocalStorage() {
+    const saved = localStorage.getItem('cv_app_data');
+    if (!saved) return;
+    try {
+        const data = JSON.parse(saved);
+        if (data.name) document.getElementById('inputName').value = data.name;
+        if (data.email) document.getElementById('inputEmail').value = data.email;
+        if (data.phone) document.getElementById('inputPhone').value = data.phone;
+        if (data.address) document.getElementById('inputAddress').value = data.address;
+        if (data.summary) document.getElementById('inputSummary').value = data.summary;
+        if (data.skills) document.getElementById('inputSkills').value = data.skills;
+        // Répéter pour les autres champs si besoin
+    } catch(e) { console.error("Erreur chargement localStorage", e); }
+}
+
+// Sauvegarder à chaque modification
+function saveToLocalStorage() {
+    const data = {
+        name: getInputValue('inputName'),
+        email: getInputValue('inputEmail'),
+        phone: getInputValue('inputPhone'),
+        address: getInputValue('inputAddress'),
+        summary: getInputValue('inputSummary'),
+        skills: getInputValue('inputSkills')
+    };
+    localStorage.setItem('cv_app_data', JSON.stringify(data));
+}
+function createResignationLetter() {
+    const job = getInputValue('demissionJob');
+    const company = getInputValue('demissionCompany');
+    const noticeSelect = document.getElementById('demissionNotice');
+    const notice = noticeSelect ? noticeSelect.value : '1_mois';
+    
+    const lang = typeof getLang === 'function' ? getLang() : 'fr';
+    const t = (typeof resignationI18n !== 'undefined' && resignationI18n[lang]) ? resignationI18n[lang] : resignationI18n['fr'];
+
+    if (!job) {
+        alert('Veuillez indiquer votre poste.');
+        return;
+    }
+
+    // Libellé de la durée du préavis selon la langue
+    let noticePhrase = '';
+    if (notice === '1_mois') {
+        noticePhrase = lang === 'mg' ? '1 volana' : (lang === 'en' ? '1 month' : '1 mois');
+    } else if (notice === '3_mois') {
+        noticePhrase = lang === 'mg' ? '3 volana' : (lang === 'en' ? '3 months' : '3 mois');
+    } else {
+        noticePhrase = lang === 'mg' ? 'nifanarahana' : (lang === 'en' ? 'agreed upon mutually' : 'convenu d\'un commun accord');
+    }
+
+    // Construction du texte de la démission dans la langue sélectionnée
+    let bodyHtml = `<p>${t.dear},</p>`;
+    
+    if (lang === 'mg') {
+        bodyHtml += `<p>Amin'ny alalan'ity taratasy ity no hampandrenesiko anao ny fanapahan-kevitro hametra-pialana amin'ny toerako amin'ny maha <strong>${escapeHTML(job)}</strong> ahy ato amin'ny orinasa <strong>${escapeHTML(company)}</strong>.</p>`;
+        bodyHtml += `<p>${t.notice} <strong>${noticePhrase}</strong>, ka handao ny toeram-piasana amin'ny fiafaran'io fe-potoana io.</p>`;
+    } else if (lang === 'en') {
+        bodyHtml += `<p>Please accept this letter as formal notification that I am resigning from my position as <strong>${escapeHTML(job)}</strong> at <strong>${escapeHTML(company)}</strong>.</p>`;
+        bodyHtml += `<p>${t.notice} <strong>${noticePhrase}</strong>.</p>`;
+    } else {
+        bodyHtml += `<p>Par la présente, je vous informe de ma décision de démissionner de mes fonctions de <strong>${escapeHTML(job)}</strong> au sein de l'entreprise <strong>${escapeHTML(company)}</strong>.</p>`;
+        bodyHtml += `<p>${t.notice} <strong>${noticePhrase}</strong>, quittant ainsi officiellement l'entreprise à l'expiration de ce délai.</p>`;
+    }
+
+    bodyHtml += `<p>${t.thank}</p>`;
+    bodyHtml += `<p>${t.transition}</p>`;
+    bodyHtml += `<p>${t.sincerely}</p>`;
+
+    const editor = document.getElementById('demissionEditable');
+    if (editor) editor.innerHTML = bodyHtml;
+
+    // Mise à jour de l'objet de la démission selon la langue
+    const objetEl = document.getElementById('demissionPreviewObjet');
+    if (objetEl) objetEl.textContent = t.objet;
+}
+
+function updateAllDocumentPreviews() {
+    // Met à jour les textes selon la langue choisie
+    createResignationLetter();
+    if (typeof createJobApplication === 'function') createJobApplication();
 }
