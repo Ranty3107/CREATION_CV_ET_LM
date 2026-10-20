@@ -1047,33 +1047,29 @@ function openMvolaModal(type = 'cv') {
 
     pendingDownloadType = type;
 
-    // Adaptation des textes de la modale selon le type
+    // Générer automatiquement le contenu de la démission si on clique sur démission
+    if (type === 'demission' && typeof createResignationLetter === 'function') {
+        createResignationLetter();
+    } else if (type === 'letter' && typeof createMotivationLetter === 'function') {
+        createMotivationLetter();
+    }
+
     const titleEl = document.getElementById('mvolaModalTitle');
     const textEl = document.getElementById('mvolaModalText');
     const btnEl = document.getElementById('modalDownloadPdfBtn');
 
-    if (type === 'letter') {
+    if (type === 'demission') {
+        if (titleEl) titleEl.textContent = "Lettre de démission prête !";
+        if (textEl) textEl.textContent = "Votre lettre de démission a été générée avec succès.";
+        if (btnEl) btnEl.innerHTML = `🖨️ Télécharger ma démission en PDF`;
+    } else if (type === 'letter') {
         if (titleEl) titleEl.textContent = "Lettre de motivation prête !";
         if (textEl) textEl.textContent = "Votre lettre de motivation a été générée avec succès.";
-        if (btnEl) {
-            btnEl.innerHTML = `
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l4 4m0 0l-4-4m4 4V4"/>
-                </svg>
-                Télécharger ma lettre en PDF
-            `;
-        }
+        if (btnEl) btnEl.innerHTML = `🖨️ Télécharger ma lettre en PDF`;
     } else {
         if (titleEl) titleEl.textContent = "CV généré avec succès !";
         if (textEl) textEl.textContent = "Votre CV a été créé avec succès.";
-        if (btnEl) {
-            btnEl.innerHTML = `
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l4 4m0 0l-4-4m4 4V4"/>
-                </svg>
-                Télécharger mon CV en PDF
-            `;
-        }
+        if (btnEl) btnEl.innerHTML = `🖨️ Télécharger mon CV en PDF`;
     }
 
     modal.classList.remove('hidden');
@@ -1095,10 +1091,34 @@ async function downloadPDF() {
         printMotivationLetter();
         return;
     }
-if (pendingDownloadType === 'deces') {
-        window.print(); // Imprime directement le faire-part format A4
+    
+    // Ajout de la gestion pour la démission
+    if (pendingDownloadType === 'demission') {
+        const demissionElement = document.getElementById('demissionPreview');
+        if (!demissionElement) {
+            alert('Impossible de trouver la lettre de démission à imprimer.');
+            return;
+        }
+        
+        const originalTitle = document.title;
+        document.title = `Lettre_de_demission`;
+        setPDFButtonsLoading(true);
+
+        setTimeout(() => {
+            window.print();
+            setTimeout(() => {
+                document.title = originalTitle;
+                setPDFButtonsLoading(false);
+            }, 1000);
+        }, 300);
         return;
     }
+
+    if (pendingDownloadType === 'deces') {
+        window.print();
+        return;
+    }
+
     const cv = document.getElementById('cvPreview');
     if (!cv) {
         alert('Impossible de trouver le CV à imprimer.');

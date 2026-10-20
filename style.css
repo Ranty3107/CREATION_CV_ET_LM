@@ -1054,3 +1054,17 @@
         background: #fffdf9 !important;
     }
 }
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    #demissionPreview, #demissionPreview * {
+        visibility: visible;
+    }
+    #demissionPreview {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+    }
+}
